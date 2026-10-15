@@ -1,0 +1,10 @@
+{
+  "id": "T2-threshold-control",
+  "basis": "Re-score saved measured outcome; no engine/runner/default change",
+  "thresholdBeforeM": 0.5,
+  "thresholdProposedM": 0.55,
+  "cupDistanceM": 0.5495838691907307,
+  "allSmallWithinProposed": true,
+  "gelOutsideStrip": 5,
+  "mannequinEdgeDistanceM": 0.0657246013114694
+}

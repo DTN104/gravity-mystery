@@ -1,0 +1,332 @@
+[
+  {
+    "name": "hallway",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/hallway.jpg",
+    "at": "2026-10-13T04:55:56.249Z"
+  },
+  {
+    "name": "lab-observation",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/lab-observation.jpg",
+    "at": "2026-10-13T04:56:30.073Z"
+  },
+  {
+    "name": "file-evidence",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/file-evidence.jpg",
+    "at": "2026-10-13T04:57:37.161Z"
+  },
+  {
+    "name": "dialogue",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/dialogue.jpg",
+    "at": "2026-10-13T04:58:22.337Z"
+  },
+  {
+    "name": "dialogue-reply",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/dialogue-reply.jpg",
+    "at": "2026-10-13T04:58:35.728Z"
+  },
+  {
+    "name": "file-statements",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/file-statements.jpg",
+    "at": "2026-10-13T05:00:24.647Z"
+  },
+  {
+    "name": "control",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/control.jpg",
+    "at": "2026-10-13T05:00:38.587Z"
+  },
+  {
+    "name": "calibration-idle",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-idle.jpg",
+    "at": "2026-10-13T05:15:05.928Z"
+  },
+  {
+    "name": "menu",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/menu.jpg",
+    "at": "2026-10-13T05:28:56.543Z"
+  },
+  {
+    "name": "calibration-locked",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-locked.jpg",
+    "at": "2026-10-13T05:30:40.603Z"
+  },
+  {
+    "name": "calibration-active",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-active.jpg",
+    "at": "2026-10-13T05:31:07.207Z"
+  },
+  {
+    "name": "calibration-return",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-return.jpg",
+    "at": "2026-10-13T05:31:26.713Z"
+  },
+  {
+    "name": "hallway",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/hallway.jpg",
+    "at": "2026-10-13T05:31:43.876Z"
+  },
+  {
+    "name": "rule-book",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/rule-book.jpg",
+    "at": "2026-10-13T05:31:55.570Z"
+  },
+  {
+    "name": "lab-observation",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/lab-observation.jpg",
+    "at": "2026-10-13T05:32:12.013Z"
+  },
+  {
+    "name": "file-evidence",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/file-evidence.jpg",
+    "at": "2026-10-13T05:32:23.009Z"
+  },
+  {
+    "name": "dialogue-reply",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/dialogue-reply.jpg",
+    "at": "2026-10-13T05:32:30.950Z"
+  },
+  {
+    "name": "file-statements",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/file-statements.jpg",
+    "at": "2026-10-13T05:32:40.946Z"
+  },
+  {
+    "name": "control",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/control.jpg",
+    "at": "2026-10-13T05:32:51.958Z"
+  },
+  {
+    "name": "replay-east-wet",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/replay-east-wet.jpg",
+    "at": "2026-10-13T05:33:29.527Z"
+  },
+  {
+    "name": "replay-west",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/replay-west.jpg",
+    "at": "2026-10-13T05:34:20.335Z"
+  },
+  {
+    "name": "conclusion-required",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/conclusion-required.jpg",
+    "at": "2026-10-13T05:34:21.108Z"
+  },
+  {
+    "name": "responsive-conclusion-320",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-conclusion-320.jpg",
+    "at": "2026-10-13T05:34:45.225Z"
+  },
+  {
+    "name": "responsive-conclusion-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-conclusion-375.jpg",
+    "at": "2026-10-13T05:34:45.430Z"
+  },
+  {
+    "name": "responsive-conclusion-768",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-conclusion-768.jpg",
+    "at": "2026-10-13T05:34:45.633Z"
+  },
+  {
+    "name": "responsive-conclusion-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-conclusion-1400.jpg",
+    "at": "2026-10-13T05:34:45.786Z"
+  },
+  {
+    "name": "responsive-dialogue-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-dialogue-375.jpg",
+    "at": "2026-10-13T05:35:50.544Z"
+  },
+  {
+    "name": "responsive-dialogue-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-dialogue-1400.jpg",
+    "at": "2026-10-13T05:35:50.853Z"
+  },
+  {
+    "name": "responsive-hallway-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-hallway-375.jpg",
+    "at": "2026-10-13T05:35:51.566Z"
+  },
+  {
+    "name": "responsive-hallway-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-hallway-1400.jpg",
+    "at": "2026-10-13T05:35:51.756Z"
+  },
+  {
+    "name": "responsive-lab-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-lab-375.jpg",
+    "at": "2026-10-13T05:35:52.256Z"
+  },
+  {
+    "name": "responsive-lab-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-lab-1400.jpg",
+    "at": "2026-10-13T05:35:52.479Z"
+  },
+  {
+    "name": "diagnostic-confirmed",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/diagnostic-confirmed.jpg",
+    "at": "2026-10-13T05:37:52.489Z"
+  },
+  {
+    "name": "ending-early",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/ending-early.jpg",
+    "at": "2026-10-13T05:37:53.308Z"
+  },
+  {
+    "name": "menu",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/menu.jpg",
+    "at": "2026-10-13T05:39:51.259Z"
+  },
+  {
+    "name": "responsive-menu-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-menu-375.jpg",
+    "at": "2026-10-13T05:39:51.563Z"
+  },
+  {
+    "name": "responsive-menu-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-menu-1400.jpg",
+    "at": "2026-10-13T05:39:51.769Z"
+  },
+  {
+    "name": "responsive-hallway-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-hallway-375.jpg",
+    "at": "2026-10-13T05:39:52.276Z"
+  },
+  {
+    "name": "responsive-hallway-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-hallway-1400.jpg",
+    "at": "2026-10-13T05:39:52.471Z"
+  },
+  {
+    "name": "responsive-dialogue-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-dialogue-375.jpg",
+    "at": "2026-10-13T05:39:53.036Z"
+  },
+  {
+    "name": "responsive-dialogue-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-dialogue-1400.jpg",
+    "at": "2026-10-13T05:39:53.298Z"
+  },
+  {
+    "name": "hallway",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/hallway.jpg",
+    "at": "2026-10-13T05:40:13.650Z"
+  },
+  {
+    "name": "control",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/control.jpg",
+    "at": "2026-10-13T05:40:14.104Z"
+  },
+  {
+    "name": "responsive-control-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-control-375.jpg",
+    "at": "2026-10-13T05:40:14.355Z"
+  },
+  {
+    "name": "responsive-control-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-control-1400.jpg",
+    "at": "2026-10-13T05:40:14.564Z"
+  },
+  {
+    "name": "responsive-file-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-file-375.jpg",
+    "at": "2026-10-13T05:41:54.143Z"
+  },
+  {
+    "name": "responsive-file-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-file-1400.jpg",
+    "at": "2026-10-13T05:41:54.345Z"
+  },
+  {
+    "name": "calibration-idle",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-idle.jpg",
+    "at": "2026-10-13T05:42:27.317Z"
+  },
+  {
+    "name": "responsive-calibration-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-calibration-375.jpg",
+    "at": "2026-10-13T05:42:27.416Z"
+  },
+  {
+    "name": "responsive-calibration-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-calibration-1400.jpg",
+    "at": "2026-10-13T05:42:27.524Z"
+  },
+  {
+    "name": "tool-water",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/tool-water.jpg",
+    "at": "2026-10-13T05:45:20.104Z"
+  },
+  {
+    "name": "tool-water",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/tool-water.jpg",
+    "at": "2026-10-13T05:47:34.110Z"
+  },
+  {
+    "name": "tool-wiped",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/tool-wiped.jpg",
+    "at": "2026-10-13T05:47:35.063Z"
+  },
+  {
+    "name": "calibration-idle",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-idle.jpg",
+    "at": "2026-10-13T05:48:25.330Z"
+  },
+  {
+    "name": "responsive-calibration-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-calibration-375.jpg",
+    "at": "2026-10-13T05:48:25.534Z"
+  },
+  {
+    "name": "responsive-hallway-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-hallway-375.jpg",
+    "at": "2026-10-13T05:48:26.290Z"
+  },
+  {
+    "name": "responsive-hallway-1400",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-hallway-1400.jpg",
+    "at": "2026-10-13T05:48:26.448Z"
+  },
+  {
+    "name": "dialogue-reply",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/dialogue-reply.jpg",
+    "at": "2026-10-13T05:48:27.266Z"
+  },
+  {
+    "name": "responsive-calibration-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-calibration-375.jpg",
+    "at": "2026-10-13T05:50:38.165Z"
+  },
+  {
+    "name": "responsive-calibration-375",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/responsive-calibration-375.jpg",
+    "at": "2026-10-13T05:51:01.231Z"
+  },
+  {
+    "name": "hallway",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/hallway.jpg",
+    "at": "2026-10-13T05:51:01.841Z"
+  },
+  {
+    "name": "dialogue-reply",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/dialogue-reply.jpg",
+    "at": "2026-10-13T05:51:02.760Z"
+  },
+  {
+    "name": "calibration-locked",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-locked.jpg",
+    "at": "2026-10-13T06:33:59.285Z"
+  },
+  {
+    "name": "calibration-return",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/calibration-return.jpg",
+    "at": "2026-10-13T06:36:15.661Z"
+  },
+  {
+    "name": "rule-book",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/rule-book.jpg",
+    "at": "2026-10-13T06:36:31.131Z"
+  },
+  {
+    "name": "ready-to-play",
+    "path": "/Users/td-macbook-07/Work/gravity-mystery/proto/tests/game-ui/ready-to-play.jpg",
+    "at": "2026-10-13T06:38:12.680Z"
+  }
+]

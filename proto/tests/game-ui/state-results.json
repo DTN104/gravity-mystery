@@ -1,0 +1,42 @@
+[
+  {
+    "id": "UI-STATE-1",
+    "label": "Ghi một lần; terminal khóa; diễn giải không lộ trước thí nghiệm",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-2",
+    "label": "Hội thoại ghi đúng nguồn, không trùng; xin quyền cần bốn quy tắc",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-3",
+    "label": "Đối chất Khoa theo thứ tự vật chứng và quy tắc, không bỏ qua khóa",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-4",
+    "label": "Nhật ký bốn trường, không có hướng",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-5",
+    "label": "16 tổ hợp minh hoạ; nước và hướng đổi kết quả; chốt ban đầu vẫn mơ hồ",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-6",
+    "label": "Kết luận trống, lựa chọn sai, thiếu chứng cứ và kết luận đủ được xử lý",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-7",
+    "label": "Cầu nối từ chối dữ liệu sai kiểu và ID quy tắc không biết",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-8",
+    "label": "Mọi PARAMS cũ giữ nguyên; chỉ thêm nhánh fullGame",
+    "pass": true
+  }
+]

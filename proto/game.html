@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="vi" data-full-game>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="data:,"><title>Trạm Thiên Bình · Điều tra</title>
+  <link rel="stylesheet" href="./src/game/interface.css">
+</head>
+<body data-game-shell>
+  <header class="app-header"><button class="brand" data-go="menu">TRẠM THIÊN BÌNH</button><div class="heading"><h1 id="page-title">Hồ sơ điều tra</h1><p id="objective"></p></div><button id="hallway-return" data-go="hallway" hidden>Về hành lang</button><button id="verdict-link" data-go="conclusion">Viết kết luận</button></header>
+  <p id="notification" role="status" hidden></p>
+  <main id="stage"></main>
+  <section id="calibration-holder" hidden><iframe id="calibration-frame" title="Buồng hiệu chuẩn — mô phỏng vật lý" loading="eager"></iframe><p class="frame-help">Đồng hồ trong buồng là giờ mô phỏng, không phải thời điểm điều tra. Mở Sổ tay để trả lời từ những gì đã quan sát.</p></section>
+  <nav id="navigation" aria-label="Điều hướng"><button data-go="hallway">Hành lang</button><button data-go="file">Hồ sơ</button><button data-go="book">Sổ quy tắc</button><button data-go="replay">Tái hiện</button></nav>
+  <noscript>Game cần JavaScript để điều tra và mô phỏng buồng hiệu chuẩn.</noscript>
+  <script type="module" src="./src/game/app.js"></script>
+</body>
+</html>

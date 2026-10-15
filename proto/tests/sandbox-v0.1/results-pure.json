@@ -1,0 +1,42 @@
+[
+  {
+    "id": "T17",
+    "status": "PASS",
+    "measured": {
+      "maximum": 3,
+      "order": [
+        79200,
+        79380,
+        79560
+      ],
+      "gravityOrder": [
+        "EAST",
+        "DOWN",
+        "WEST",
+        "DOWN",
+        "UP",
+        "DOWN"
+      ],
+      "scheduleEdits": 3,
+      "fourthRejected": true,
+      "overlapWarnRejected": true,
+      "rejectedEditPreserved": true
+    }
+  },
+  {
+    "id": "T19",
+    "status": "PASS",
+    "measured": {
+      "detectorCounts": {
+        "R1": 1,
+        "R2": 1,
+        "R3": 1,
+        "R4": 1,
+        "R5": 1
+      },
+      "negativeControls": 9,
+      "wrongAttemptsPerRule": 1,
+      "unlockRecordsPerRule": 1
+    }
+  }
+]

@@ -1,0 +1,208 @@
+{
+  "version": "v0.3",
+  "start": "2026-10-10T10:08:52.668+07:00",
+  "mode": "Agent headed Chrome UI observation, including automated measurements; not independent human playtest",
+  "actions": [
+    {
+      "at": "2026-10-10T10:09:00+07:00",
+      "action": "Load v0.3 and run collision regressions; both mannequin poses have zero table contacts and all other collider types remain active; tangent speed 2 m/s does not spill."
+    },
+    {
+      "at": "2026-10-10T03:15:25.711530+00:00",
+      "action": "Functional tests and headed performance measured. Cup EAST pool y=0.997246 m; 117.9866 fps at x60. Mannequin tips upward, gel drifts and old pen has no eligible gel after bounded wait."
+    },
+    {
+      "action": "Independent fresh-load confirmation: headRadius=0.10 passes all 14 functional tests; T1b observation retained; application restored to 0.12."
+    },
+    {
+      "at": "2026-10-10T03:24:03.530Z",
+      "action": "Start EAST from UI at x1",
+      "measured": {
+        "state": "WARN",
+        "now": 78900.01666666666,
+        "mannequinCentre": {
+          "x": 1.9000004447656835,
+          "y": 0.19975130036328437
+        },
+        "mannequinEastEdge": 2.927970041121737,
+        "gelCount": 60,
+        "bolt": 0,
+        "log": []
+      }
+    },
+    {
+      "at": "2026-10-10T03:24:19.102Z",
+      "action": "EAST ACTIVE after 2.5 real seconds",
+      "measured": {
+        "state": "ACTIVE",
+        "now": 78915.59166666304,
+        "mannequinCentre": {
+          "x": 3.707812853830643,
+          "y": 1.4134096413514237
+        },
+        "mannequinEastEdge": 4.006299392118888,
+        "gelCount": 60,
+        "bolt": 0.2,
+        "log": [
+          {
+            "t": 78910.01666666666,
+            "event": "MANUAL_START",
+            "origin": "local"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-10T03:25:18.589Z",
+      "action": "Manual EAST RETURN +5 real seconds",
+      "measured": {
+        "state": "IDLE",
+        "now": 78975.08333331585,
+        "mannequinCentre": {
+          "x": 2.102000222735693,
+          "y": 0.19990379385793972
+        },
+        "mannequinEastEdge": 3.1299766194667247,
+        "gelCount": 60,
+        "bolt": 0.2,
+        "log": [
+          {
+            "t": 78910.01666666666,
+            "event": "MANUAL_START",
+            "origin": "local"
+          },
+          {
+            "t": 78970.01666666666,
+            "event": "RETURN",
+            "origin": "local"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-10T03:25:24.308Z",
+      "action": "Scheduled EAST at x60 through hallway window",
+      "measured": {
+        "state": "ACTIVE",
+        "now": 79241.0249999206,
+        "mannequinCentre": {
+          "x": 3.7508331647302997,
+          "y": 1.9761923938165256
+        },
+        "mannequinEastEdge": 4.0023068145854435,
+        "gelCount": 60,
+        "bolt": 0.2,
+        "log": [
+          {
+            "t": 78902.99166666597,
+            "event": "SCHEDULE_EDIT",
+            "origin": "local"
+          },
+          {
+            "t": 79200,
+            "event": "SCHEDULED_START",
+            "origin": "local"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-10T03:25:38.742Z",
+      "action": "Scheduled RETURN and journal",
+      "measured": {
+        "state": "IDLE",
+        "now": 80106.73333305237,
+        "mannequinCentre": {
+          "x": 2.9446629515536564,
+          "y": 0.20752695066027343
+        },
+        "mannequinEastEdge": 3.9726847100947316,
+        "gelCount": 60,
+        "bolt": 0.2,
+        "log": [
+          {
+            "t": 78902.99166666597,
+            "event": "SCHEDULE_EDIT",
+            "origin": "local"
+          },
+          {
+            "t": 79200,
+            "event": "SCHEDULED_START",
+            "origin": "local"
+          },
+          {
+            "t": 80100,
+            "event": "RETURN",
+            "origin": "local"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-10T03:25:54.373Z",
+      "action": "WEST at x1: tray retains gel",
+      "measured": {
+        "state": "ACTIVE",
+        "now": 78917.54999999591,
+        "mannequinCentre": {
+          "x": 0.9077971529821736,
+          "y": 0.27875476932615184
+        },
+        "mannequinEastEdge": 1.935782629361717,
+        "gelCount": 60,
+        "bolt": 0,
+        "log": [
+          {
+            "t": 78912.04166666619,
+            "event": "MANUAL_START",
+            "origin": "local"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-10T03:26:48.870Z",
+      "action": "WEST RETURN",
+      "measured": {
+        "state": "IDLE",
+        "now": 78972.04999998322,
+        "mannequinCentre": {
+          "x": 0.9079287139834759,
+          "y": 0.27655261184705865
+        },
+        "mannequinEastEdge": 1.9359664213484746,
+        "gelCount": 60,
+        "bolt": 0,
+        "log": [
+          {
+            "t": 78912.04166666619,
+            "event": "MANUAL_START",
+            "origin": "local"
+          },
+          {
+            "t": 78972.04166666619,
+            "event": "RETURN",
+            "origin": "local"
+          }
+        ]
+      }
+    }
+  ],
+  "drags": [
+    {
+      "pose": "lying",
+      "grabbed": "mannequin"
+    },
+    {
+      "pose": "standing",
+      "grabbed": "mannequin"
+    }
+  ],
+  "end": "2026-10-10T03:26:48.887Z",
+  "realElapsedMinutes": 17.936983333333334,
+  "subjective": {
+    "T1_to_T2_aha": "chưa thuyết phục: đồ rời tụ Đông nhưng hình nộm trở về nằm xa chân Đông",
+    "T11_aha": "có về hướng trọng lực và chốt: qua ô kính thấy hình nộm dựng dọc cụm Đông và chốt đóng; tiếp xúc sát Đông vẫn chưa đạt ngưỡng của runner",
+    "limit": "Agent UI observation and screenshots, including automated tests/counterexamples; not independent human playtest"
+  }
+}

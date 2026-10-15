@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-11",
+  "steps": [
+    {
+      "stage": "after-first-cycle",
+      "water": "Bình nước · 0.0 L",
+      "status": "21:56 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng"
+    },
+    {
+      "stage": "refilled",
+      "water": "Bình nước · 0.5 L",
+      "status": "21:56 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng"
+    },
+    {
+      "stage": "still-full-before-pour",
+      "water": "Bình nước · 0.5 L",
+      "status": "21:56 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng"
+    },
+    {
+      "stage": "manual-floor-pour",
+      "water": "Bình nước · 0.4 L",
+      "events": "Còi — sắp trả về Xuống.Không trọng lực. Mọi thứ lơ lửng.Về XUỐNG. Sàn lại là sàn.Vũng trên tường Đông chảy xuống thành vệt.Nước loang thành vũng trên sàn."
+    },
+    {
+      "stage": "r2-after-manual-pour",
+      "quiz": "Quan sát R2 · Bạn rút ra điều gì?Vệt kéo ngang trên sàn = chất lỏng đã nằm trên sàn trước khi xoay.Nước luôn chảy về phía cửa.Vệt kéo ngang = có người lôi vật nặng qua.Để thử thêm"
+    },
+    {
+      "stage": "r2-unlocked",
+      "tasks": [
+        {
+          "complete": true,
+          "id": "task-0"
+        },
+        {
+          "complete": true,
+          "id": "task-1"
+        },
+        {
+          "complete": false,
+          "id": "task-2"
+        },
+        {
+          "complete": false,
+          "id": "task-3"
+        }
+      ]
+    },
+    {
+      "stage": "ready-after-second-cycle",
+      "water": "Bình nước · 0.5 L",
+      "status": "23:05 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng"
+    }
+  ],
+  "console": {
+    "runner": [],
+    "ui": []
+  }
+}

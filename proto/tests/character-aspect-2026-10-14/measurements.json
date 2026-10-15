@@ -1,0 +1,171 @@
+{
+  "before": {
+    "backgroundSize": "300% 100%",
+    "height": 923,
+    "width": 465
+  },
+  "after": {
+    "backgroundSize": "300% auto",
+    "height": 465,
+    "sceneHeight": 465,
+    "width": 465
+  },
+  "withReply": {
+    "height": 465,
+    "width": 465
+  },
+  "thumbnails": [
+    {
+      "backgroundSize": "300% auto",
+      "height": 46,
+      "width": 46
+    },
+    {
+      "backgroundSize": "300% auto",
+      "height": 46,
+      "width": 46
+    },
+    {
+      "backgroundSize": "300% auto",
+      "height": 46,
+      "width": 46
+    }
+  ],
+  "measurements": [
+    {
+      "person": "lam",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 1280,
+      "height": 465,
+      "position": "0% 100%",
+      "sceneHeight": 465,
+      "sceneWidth": 904,
+      "scrollWidth": 1280,
+      "width": 465
+    },
+    {
+      "person": "lam",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 768,
+      "height": 465,
+      "position": "0% 100%",
+      "sceneHeight": 465,
+      "sceneWidth": 718,
+      "scrollWidth": 768,
+      "width": 465
+    },
+    {
+      "person": "lam",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 375,
+      "height": 341,
+      "position": "0% 100%",
+      "sceneHeight": 358,
+      "sceneWidth": 341,
+      "scrollWidth": 375,
+      "width": 341
+    },
+    {
+      "person": "thu",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 1280,
+      "height": 465,
+      "position": "50% 100%",
+      "sceneHeight": 465,
+      "sceneWidth": 904,
+      "scrollWidth": 1280,
+      "width": 465
+    },
+    {
+      "person": "thu",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 768,
+      "height": 465,
+      "position": "50% 100%",
+      "sceneHeight": 465,
+      "sceneWidth": 718,
+      "scrollWidth": 768,
+      "width": 465
+    },
+    {
+      "person": "thu",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 375,
+      "height": 341,
+      "position": "50% 100%",
+      "sceneHeight": 358,
+      "sceneWidth": 341,
+      "scrollWidth": 375,
+      "width": 341
+    },
+    {
+      "person": "khoa",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 1280,
+      "height": 465,
+      "position": "100% 100%",
+      "sceneHeight": 465,
+      "sceneWidth": 904,
+      "scrollWidth": 1280,
+      "width": 465
+    },
+    {
+      "person": "khoa",
+      "viewport": {
+        "width": 768,
+        "height": 900
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 768,
+      "height": 465,
+      "position": "100% 100%",
+      "sceneHeight": 465,
+      "sceneWidth": 718,
+      "scrollWidth": 768,
+      "width": 465
+    },
+    {
+      "person": "khoa",
+      "viewport": {
+        "width": 375,
+        "height": 812
+      },
+      "backgroundSize": "300% auto",
+      "clientWidth": 375,
+      "height": 341,
+      "position": "100% 100%",
+      "sceneHeight": 358,
+      "sceneWidth": 341,
+      "scrollWidth": 375,
+      "width": 341
+    }
+  ]
+}

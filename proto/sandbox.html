@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi" data-sandbox>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="data:,"><title>Buồng hiệu chuẩn</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--background);color:var(--hover);font:var(--fontSize) monospace}
+    main{display:grid;grid-template-columns:minmax(0,1fr) var(--sideColumn);gap:var(--padding);max-width:var(--layoutMax);margin:auto;padding:var(--padding)}
+    @media (max-width:1000px){main{grid-template-columns:1fr}}
+    h1{font:inherit;font-weight:bold;margin:0 0 var(--gap)}h2{font-size:inherit;margin:var(--gap) 0}
+    #left{min-width:0}#canvas{width:100%}#canvas>canvas{display:block;width:100%!important;height:auto!important}
+    #side{display:flex;flex-direction:column;gap:var(--gap)}
+    button,input,summary{font:inherit}button,input{color:inherit;background:var(--room);border:var(--borderWidth) solid var(--static);padding:var(--gap)}
+    button{cursor:pointer}button:hover,button[aria-pressed=true],button.unlocked{border-color:var(--coated);background:var(--door)}
+    button:disabled{opacity:var(--disabledOpacity);cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:var(--focusWidth) solid var(--warning);outline-offset:var(--focusOffset)}
+    .toolbar,#directions,#durations,#time-scales{display:flex;flex-wrap:wrap;gap:var(--gap)}
+    fieldset{margin-block:var(--gap);border:var(--borderWidth) solid var(--static)}
+    /* C3 trạng thái + D1 bỏ qua chờ */
+    #status-bar{display:flex;align-items:center;gap:var(--gap);flex-wrap:wrap;font-size:var(--eventFont);padding:var(--gap);border:var(--borderWidth) solid var(--static)}
+    #game-status{margin:0;flex:1}#skip-wait{font-size:var(--fontSize);border-color:var(--warning)}
+    /* B1 dòng sự kiện */
+    #events{min-height:calc(var(--eventFont) * 7);margin:var(--gap) 0;padding:var(--gap);border-left:3px solid var(--warning);font-size:var(--eventFont);line-height:1.35}
+    #events p{margin:0}#events p.old{opacity:.55}#events p.older{opacity:.3}
+    /* A2 bảng dock */
+    #panel-dock{border:var(--borderWidth) solid var(--static);padding:var(--gap)}#panel-dock.flash{outline:var(--focusWidth) solid var(--warning)}
+    #panel-dock p{margin:var(--gap) 0}
+    #try-card ul{padding-left:var(--padding);margin:0}li{margin-block:var(--gap)}.complete{text-decoration:line-through;color:var(--gel)}
+    #bolt-inset{width:calc(var(--insetWidth) + var(--padding)*2);background:var(--background);padding:var(--padding);border:var(--borderWidth) solid var(--static)}
+    #bolt-detail{display:block;width:100%}#bolt-inset strong{font-weight:normal}.refusal{color:var(--refusal);min-height:1em}
+    /* B5 thẻ cột phải, không modal */
+    #cards:empty{display:none}#cards{display:flex;flex-direction:column;gap:var(--gap)}
+    #guide,#cards{position:sticky;top:0;z-index:1}
+    .card,#guide{background:var(--background);border:var(--borderWidth) solid var(--warning);padding:var(--padding)}
+    .card h2,#guide h2{margin-top:0}.card p{margin:var(--gap) 0}.answer,.rule{display:block;width:100%;text-align:left;margin-block:var(--gap)}
+    button.primary{border-color:var(--warning);background:var(--door)}
+    /* C1 hướng dẫn + C2 thẻ việc */
+    #guide .guide-text{font-size:var(--eventFont);line-height:1.35;margin:var(--gap) 0}
+    .guide-target{outline:var(--focusWidth) solid var(--warning);outline-offset:var(--focusOffset);animation:guide-blink 1s step-end infinite}
+    @keyframes guide-blink{50%{outline-color:transparent}}
+    #tasks{list-style:none;padding-left:0}button.task{display:block;width:100%;text-align:left;font-size:var(--fontSize)}
+    li.complete button.task{text-decoration:line-through;color:var(--gel)}
+    #schedule-hour,#schedule-minute{width:var(--inputWidth)}pre{white-space:pre-wrap;max-height:var(--journalHeight);overflow:auto}[hidden]{display:none!important}
+    .lil-gui{max-height:100vh;overflow:auto}
+  </style>
+</head>
+<body>
+  <main>
+    <div id="left">
+      <h1>BUỒNG HIỆU CHUẨN</h1>
+      <div id="status-bar"><p id="game-status" aria-live="polite"></p><button id="skip-wait" hidden>Bỏ qua chờ ▸</button></div>
+      <div id="canvas"></div>
+      <div id="events" aria-live="polite"></div>
+      <section id="game-hud"></section>
+    </div>
+    <aside id="side">
+      <section id="guide" aria-label="Hướng dẫn" hidden></section>
+      <div id="cards" aria-live="polite"></div>
+      <section id="panel-dock" aria-label="Bảng cục bộ"></section>
+      <details id="try-card" open><summary>Việc có thể thử</summary><ul id="tasks"></ul></details>
+      <aside id="bolt-inset" hidden></aside>
+    </aside>
+  </main>
+  <div hidden><button id="leave"></button><button id="enter"></button><pre id="status"></pre><pre id="journal"></pre><pre id="messages"></pre></div>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+  <script type="module" src="./src/game/scene.js"></script>
+</body>
+</html>

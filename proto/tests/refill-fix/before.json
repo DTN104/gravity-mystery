@@ -1,0 +1,288 @@
+[
+  {
+    "id": "MANNEQUIN-MODES",
+    "status": "PASS",
+    "measured": {
+      "modes": [
+        {
+          "hinge": false,
+          "pose": "lying",
+          "bodies": 1,
+          "mass": 70,
+          "constraint": false,
+          "centre": {
+            "x": 1.9,
+            "y": 0.2
+          },
+          "tableExcluded": true
+        },
+        {
+          "hinge": false,
+          "pose": "standing",
+          "bodies": 1,
+          "mass": 70,
+          "constraint": false,
+          "centre": {
+            "x": 2.5,
+            "y": 0.85
+          },
+          "tableExcluded": true
+        },
+        {
+          "hinge": true,
+          "pose": "lying",
+          "bodies": 2,
+          "mass": 70,
+          "constraint": true,
+          "centre": {
+            "x": 2.391512355047892,
+            "y": 0.2
+          },
+          "tableExcluded": true
+        },
+        {
+          "hinge": true,
+          "pose": "standing",
+          "bodies": 2,
+          "mass": 70,
+          "constraint": true,
+          "centre": {
+            "x": 2.5,
+            "y": 1.2915123550478924
+          },
+          "tableExcluded": true
+        }
+      ]
+    }
+  },
+  {
+    "id": "T17-UI",
+    "status": "PASS",
+    "measured": {
+      "afterFirst": "Sớm nhất có thể hẹn tiếp: 22:01:10",
+      "afterSecond": "Sớm nhất có thể hẹn tiếp: 22:04:10",
+      "afterDelete": "Sớm nhất có thể hẹn tiếp: 22:01:10"
+    }
+  },
+  {
+    "id": "T18",
+    "status": "PASS",
+    "measured": {
+      "boltBefore": 0.2,
+      "entryBefore": false,
+      "message": "Chốt bên trong đã cài. Không mở được từ hành lang.",
+      "intercomAccepted": true,
+      "masterLog": {
+        "t": 79040.00833330306,
+        "event": "MANUAL_START",
+        "origin": "master",
+        "user": "LAM"
+      },
+      "masterWarnWaitSeconds": 56.99999998672865,
+      "boltAfter": 0,
+      "entryAfter": true,
+      "log": [
+        {
+          "t": 78910,
+          "event": "MANUAL_START",
+          "origin": "local"
+        },
+        {
+          "t": 78970,
+          "event": "RETURN",
+          "origin": "local"
+        },
+        {
+          "t": 79040.00833330306,
+          "event": "MANUAL_START",
+          "origin": "master",
+          "user": "LAM"
+        },
+        {
+          "t": 79100.00833330306,
+          "event": "RETURN",
+          "origin": "master",
+          "user": "LAM"
+        }
+      ],
+      "firstReturnAt": 78970.00833331703
+    }
+  },
+  {
+    "id": "T20",
+    "status": "PASS",
+    "measured": {
+      "states": [
+        {
+          "state": "WARN",
+          "baseline": {
+            "x": 1.3,
+            "y": 0.9497499993187495
+          },
+          "dragAttempt": {
+            "x": 1.3,
+            "y": 0.9497499993187495
+          },
+          "deltaM": 0
+        },
+        {
+          "state": "ACTIVE",
+          "baseline": {
+            "x": 2.007906254651611,
+            "y": 1.1144051529068932
+          },
+          "dragAttempt": {
+            "x": 2.007906254651611,
+            "y": 1.1144051529068932
+          },
+          "deltaM": 0
+        }
+      ],
+      "idleCanInteract": true
+    }
+  },
+  {
+    "id": "T19-engine",
+    "status": "PASS",
+    "measured": {
+      "afterActive": [
+        {
+          "rule": "R2",
+          "t": 78913.0083333303
+        },
+        {
+          "rule": "R3",
+          "t": 78917.00833332937
+        }
+      ],
+      "afterReturn": [
+        {
+          "rule": "R2",
+          "t": 78913.0083333303
+        },
+        {
+          "rule": "R3",
+          "t": 78917.00833332937
+        },
+        {
+          "rule": "R1",
+          "t": 78978.00833331517
+        }
+      ],
+      "afterDrop": [
+        {
+          "rule": "R2",
+          "t": 78913.0083333303
+        },
+        {
+          "rule": "R3",
+          "t": 78917.00833332937
+        },
+        {
+          "rule": "R1",
+          "t": 78978.00833331517
+        },
+        {
+          "rule": "R5",
+          "t": 78983.008333314
+        }
+      ],
+      "coatedObjects": [
+        {
+          "id": "cup-1",
+          "kind": "cup",
+          "coatedAt": 78917.0166666627
+        },
+        {
+          "id": "pen-2",
+          "kind": "pen",
+          "coatedAt": 78922.75833332803
+        },
+        {
+          "id": "book-3",
+          "kind": "book",
+          "coatedAt": 78922.75833332803
+        },
+        {
+          "id": "mannequin-4",
+          "kind": "mannequin",
+          "coatedAt": 78918.2083333291
+        },
+        {
+          "id": "bottle-65",
+          "kind": "bottle",
+          "coatedAt": 78922.43333332811
+        }
+      ],
+      "freshCoatedAt": null
+    }
+  },
+  {
+    "id": "TOOLS",
+    "status": "PASS",
+    "measured": {
+      "belowThresholdL": 0.5,
+      "afterTiltL": 0,
+      "bottleStillExists": true,
+      "manualSurface": "SHELF",
+      "afterManualL": 0.4,
+      "refilledL": 0.5,
+      "refillDuringWarn": false
+    }
+  },
+  {
+    "id": "REFILL-AFTER-CYCLE",
+    "status": "FAIL",
+    "measured": {
+      "inputs": [
+        {
+          "source": "button",
+          "beforeL": 0,
+          "beforeAngleDeg": 814.1754364244421,
+          "immediateL": 0.5,
+          "afterFiveSecondsL": 0,
+          "afterAngleDeg": 814.1754364244421,
+          "extraSpills": 1,
+          "sameBody": true,
+          "sameJournal": true
+        }
+      ]
+    },
+    "reason": "Nạp lại sau xoay không giữ được nước / làm mất trạng thái"
+  },
+  {
+    "id": "T19-R4-view",
+    "status": "PASS",
+    "measured": {
+      "pose": "standing",
+      "hinge": false,
+      "realViewSeconds": 2.1253000000002795,
+      "events": [
+        {
+          "rule": "R3",
+          "t": 78916.0083333296
+        },
+        {
+          "rule": "R4",
+          "t": 78918.00833332914
+        }
+      ],
+      "segments": [
+        {
+          "segment": "torso",
+          "angle": 0.11814949273382261,
+          "bounds": {
+            "min": {
+              "x": 3.4006188866547147,
+              "y": 0.3955148591227402
+            },
+            "max": {
+              "x": 3.9999636832998733,
+              "y": 2.3080635874056186
+            }
+          }
+        }
+      ]
+    }
+  }
+]

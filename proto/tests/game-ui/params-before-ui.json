@@ -1,0 +1,357 @@
+{
+  "g": 9.81,
+  "warnTime": 10,
+  "zeroGTime": 3,
+  "doorUnlockDelay": 3,
+  "cooldown": 60,
+  "timeScale": 1,
+  "boltMass": 1.2,
+  "boltTravel": 0.2,
+  "boltDetent": 6,
+  "dryTime": 1200,
+  "streakLength": 1,
+  "poolRadiusPerLitre": 0.27,
+  "gelCount": 60,
+  "gelCoatMin": 1,
+  "coatRadius": 0.25,
+  "collisionCategories": {
+    "world": 1,
+    "table": 2,
+    "loose": 4,
+    "mannequin": 8
+  },
+  "mannequinMass": 70,
+  "mannequinAnchored": false,
+  "mannequinPose": "lying",
+  "doorIsOpen": false,
+  "windowZoom": 9,
+  "cooldownEnabled": true,
+  "duration": 60,
+  "direction": "EAST",
+  "scheduleAt": "22:00:00",
+  "durationMin": 60,
+  "durationMax": 1800,
+  "clockStart": 78900,
+  "secondsPerMinute": 60,
+  "secondsPerHour": 3600,
+  "secondsPerDay": 86400,
+  "pixelsPerMetre": 100,
+  "millisecondsPerSecond": 1000,
+  "physicsStep": 0.008333333333333333,
+  "airFriction": 0,
+  "sleepThreshold": 60,
+  "positionIterations": 6,
+  "velocityIterations": 4,
+  "constraintIterations": 2,
+  "zeroGNoise": 0.01,
+  "noiseSeed": 112,
+  "epsilon": 1e-9,
+  "spillSpeed": 0.5,
+  "spillAngle": 1.0471975511965976,
+  "waterVolume": 0.2,
+  "dryUpdateInterval": 1,
+  "poolShrink": 0.5,
+  "wipeRadius": 0.3,
+  "gelStopSpeed": 0.01,
+  "gelStopTime": 2,
+  "coatInterval": 0.1,
+  "anchorStiffness": 1,
+  "scheduleMax": 3,
+  "masterUser": "LAM",
+  "bottleVolume": 0.5,
+  "pourVolume": 0.1,
+  "streakWidth": 6,
+  "poolAlpha": 0.7,
+  "boltInsetZoom": 4,
+  "ruleAutoOpen": true,
+  "thuDialogue": true,
+  "showDecals": true,
+  "showCoated": true,
+  "showGravity": true,
+  "room": {
+    "width": 4,
+    "height": 3,
+    "wall": 0.2,
+    "friction": 0.6
+  },
+  "canvas": {
+    "width": 960,
+    "height": 540,
+    "origin": {
+      "x": 300,
+      "y": 430
+    }
+  },
+  "door": {
+    "x": 0.6,
+    "y": 1,
+    "width": 0.9,
+    "height": 2
+  },
+  "window": {
+    "x": 0.6,
+    "y": 1.5,
+    "width": 0.3,
+    "height": 0.3
+  },
+  "bolt": {
+    "x": 0.85,
+    "y": 1.1,
+    "width": 0.25,
+    "height": 0.04
+  },
+  "table": {
+    "left": 1,
+    "right": 2,
+    "y": 0.9,
+    "thickness": 0.05,
+    "legWidth": 0.05,
+    "legInset": 0.08
+  },
+  "shelf": {
+    "left": 3.8,
+    "right": 4,
+    "y": 0.4,
+    "thickness": 0.04
+  },
+  "tray": {
+    "left": 0,
+    "right": 0.6,
+    "bottom": 1.8,
+    "top": 2.1,
+    "thickness": 0.015,
+    "columns": 10
+  },
+  "handrails": [
+    {
+      "x": 0.05,
+      "y": 1.2
+    },
+    {
+      "x": 3.95,
+      "y": 1.2
+    }
+  ],
+  "cup": {
+    "x": 1.3,
+    "y": 0.95,
+    "width": 0.1,
+    "height": 0.1,
+    "mass": 0.3,
+    "bounce": 0.1,
+    "friction": 0.4
+  },
+  "pen": {
+    "x": 1.7,
+    "y": 0.92,
+    "width": 0.14,
+    "height": 0.015,
+    "mass": 0.02,
+    "bounce": 0,
+    "friction": 0.4
+  },
+  "book": {
+    "x": 1.5,
+    "y": 0.92,
+    "width": 0.2,
+    "height": 0.03,
+    "mass": 0.3,
+    "bounce": 0,
+    "friction": 0.7
+  },
+  "gel": {
+    "radius": 0.015,
+    "mass": 0.005,
+    "friction": 0.3,
+    "bounce": 0
+  },
+  "bottle": {
+    "x": 0.55,
+    "y": 0.84,
+    "angle": 0,
+    "width": 0.1,
+    "height": 0.22,
+    "mass": 0.6,
+    "friction": 0.4,
+    "bounce": 0
+  },
+  "mannequin": {
+    "pose": "standing",
+    "hinge": false,
+    "x": 1.9,
+    "y": 0.2,
+    "standingX": 2.5,
+    "standingY": 0.85,
+    "lyingAngle": 1.5707963267948966,
+    "width": 0.4,
+    "height": 1.7,
+    "headRadius": 0.1,
+    "friction": 0.8,
+    "bounce": 0,
+    "segments": {
+      "torso": {
+        "w": 0.4,
+        "h": 0.9,
+        "mass": 45
+      },
+      "legs": {
+        "w": 0.35,
+        "h": 0.8,
+        "mass": 25
+      }
+    },
+    "hipLength": 0,
+    "hipStiffness": 1,
+    "hipDamping": 0
+  },
+  "view": {
+    "hallwayShift": 140,
+    "viewport": {
+      "x": 90,
+      "y": 170
+    },
+    "blinkPeriod": 0.5,
+    "vectorLength": 0.45,
+    "lineWidth": 1,
+    "coatWidth": 2,
+    "streakWidth": 3,
+    "wipeWidth": 5,
+    "poolAlpha": 0.45,
+    "wipeAlpha": 0.2,
+    "splashScale": 0.4,
+    "wipeArcStart": 3.141592653589793,
+    "wipeArcEnd": 6.283185307179586,
+    "arcSegments": 24,
+    "dryStreakAlpha": 0.5,
+    "sandboxWipeAlpha": 0.65,
+    "maxFrameDelta": 0.25
+  },
+  "colors": {
+    "background": 1382685,
+    "room": 2436146,
+    "static": 8885149,
+    "door": 5464427,
+    "cup": 15065557,
+    "pen": 14991977,
+    "book": 9549001,
+    "gel": 8236687,
+    "mannequin": 10661302,
+    "water": 7446209,
+    "coated": 7464866,
+    "warning": 15251553,
+    "bolt": 14863516,
+    "bottle": 7446209,
+    "hover": 14804714,
+    "shadow": 0,
+    "refusal": 15569554
+  },
+  "sandbox": {
+    "anchorRadius": 0.5,
+    "ruleViewSeconds": 2,
+    "axisTolerance": 0.5235987755982988,
+    "wallTolerance": 0.1,
+    "refusalSeconds": 3,
+    "durations": [
+      60,
+      300,
+      900
+    ],
+    "board": {
+      "x": 1.65,
+      "y": 2.55,
+      "width": 1.1,
+      "height": 0.35
+    },
+    "supplyShelf": {
+      "left": 0.35,
+      "right": 0.9,
+      "y": 0.73,
+      "thickness": 0.04
+    },
+    "rag": {
+      "x": 0.8,
+      "y": 0.79,
+      "width": 0.15,
+      "height": 0.06
+    },
+    "refill": {
+      "x": 0.4,
+      "y": 0.79,
+      "width": 0.1,
+      "height": 0.1
+    },
+    "hoverWidth": 2,
+    "shadowAlpha": 0.2,
+    "shadowHeight": 0.03,
+    "fontSize": 15,
+    "gap": 10,
+    "padding": 12,
+    "overlayWidth": 650,
+    "insetWidth": 180,
+    "insetHeight": 70,
+    "insetMargin": 16,
+    "cardWidth": 260,
+    "hudTop": 48,
+    "cardFraction": 0.28,
+    "wallColor": 1843752,
+    "clickDistance": 8,
+    "debugKey": "`",
+    "borderWidth": 1,
+    "focusWidth": 2,
+    "focusOffset": 2,
+    "disabledOpacity": "0.5",
+    "backdropOpacity": "0.5",
+    "inputWidth": "5em",
+    "journalHeight": "12em",
+    "cursorSize": 24
+  },
+  "readable": {
+    "canvasWidth": 560,
+    "canvasHeight": 400,
+    "originX": 80,
+    "originY": 360,
+    "skipToMarginSec": 3,
+    "skipSpeed": 60,
+    "layoutMax": 1480,
+    "sideColumn": 300,
+    "eventFont": 18,
+    "flashMs": 1500,
+    "reservedHeight": 300,
+    "minCanvasCss": 560,
+    "cardsMax": 2,
+    "highlightMs": 1500,
+    "taskPointMs": 2000,
+    "pulseMs": 600,
+    "ringWidth": 3,
+    "ringPad": 8,
+    "decalBlinkMs": 2000,
+    "decalLabelMs": 3000,
+    "markFont": 16,
+    "marksDepth": 0.5,
+    "floorBand": 0.12,
+    "floorAlpha": 0.28,
+    "floorAlphaDown": 0.12,
+    "dimAlpha": 0.45,
+    "arrowCount": 3,
+    "arrowSize": 0.1
+  },
+  "ui": {
+    "width": 310,
+    "refreshInterval": 0.1,
+    "messageLimit": 8
+  },
+  "debug": {
+    "gMax": 20,
+    "timeScales": [
+      1,
+      10,
+      60
+    ],
+    "boltForceMax": 24,
+    "boltMassMax": 5,
+    "dryMin": 30,
+    "dryMax": 1200,
+    "mannequinMassMax": 100,
+    "gelMax": 60
+  }
+}

@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototype trọng lực — vật lý trần</title>
+  <link rel="icon" href="data:,">
+  <style>
+    body { margin: 16px; background: #15191d; color: #e1e6ea; font: 14px monospace; }
+    main { width: var(--canvas-width); max-width: calc(100vw - var(--panel-width) - 32px); }
+    canvas { width: 100%; height: auto; }
+    pre { white-space: pre-wrap; }
+    #journal { max-height: 160px; overflow: auto; }
+    button { padding: 8px; margin-right: 8px; }
+    .lil-gui { max-height: 100vh; overflow: auto; }
+    @media (max-width: 1000px) { main { max-width: 100%; } .lil-gui.root { position: static; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prototype vật lý trần</h1>
+    <p>Kéo vật bằng chuột. Đổ / lau: chọn công cụ rồi bấm lên bề mặt. Còi chỉ hiện bằng chữ.</p>
+    <div id="canvas"></div>
+    <p><button id="leave">Ra hành lang</button><button id="enter">Vào phòng</button></p>
+    <pre id="status" aria-live="polite"></pre>
+    <details open><summary>Nhật ký (không ghi hướng)</summary><pre id="journal"></pre></details>
+    <pre id="messages" aria-live="polite"></pre>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+  <script type="module">
+// ===== src/params.js =====
+const DIRECTIONS = {
+  DOWN: { x: 0, y: -1 }, UP: { x: 0, y: 1 },
+  WEST: { x: -1, y: 0 }, EAST: { x: 1, y: 0 },
+};
+
+const PARAMS = {
+  g: 9.81, warnTime: 10, zeroGTime: 3, doorUnlockDelay: 3, cooldown: 60,
+  timeScale: 1,
+  boltMass: 1.2, boltTravel: 0.20, boltDetent: 6,
+  dryTime: 1200, streakLength: 1.0, poolRadiusPerLitre: 0.27,
+  gelCount: 60, gelCoatMin: 2, coatRadius: 0.20,
+  collisionCategories: { world: 0x0001, table: 0x0002, loose: 0x0004, mannequin: 0x0008 },
+  mannequinMass: 70, mannequinAnchored: false, mannequinPose: 'lying', doorIsOpen: false,
+  windowZoom: 9,
+  cooldownEnabled: true, duration: 60, direction: 'EAST', scheduleAt: '22:00:00',
+  durationMin: 60, durationMax: 1800, clockStart: 21 * 3600 + 55 * 60,
+  secondsPerMinute: 60, secondsPerHour: 3600, secondsPerDay: 86400,
+  pixelsPerMetre: 100, millisecondsPerSecond: 1000,
+  physicsStep: 1 / 120, airFriction: 0, sleepThreshold: 60,
+  positionIterations: 6, velocityIterations: 4, constraintIterations: 2,
+  zeroGNoise: 0.01, noiseSeed: 112, epsilon: 1e-9,
+  spillSpeed: 0.5, spillAngle: Math.PI / 3, waterVolume: 0.2,
+  dryUpdateInterval: 1, poolShrink: 0.5, wipeRadius: 0.3,
+  gelStopSpeed: 0.01, gelStopTime: 2, coatInterval: 0.1,
+  anchorStiffness: 1,
+  showDecals: true, showCoated: true, showGravity: true,
+  room: { width: 4, height: 3, wall: 0.2, friction: 0.6 },
+  canvas: { width: 960, height: 540, origin: { x: 300, y: 430 } },
+  door: { x: 0.6, y: 1, width: 0.9, height: 2 },
+  window: { x: 0.6, y: 1.5, width: 0.3, height: 0.3 },
+  bolt: { x: 0.85, y: 1.1, width: 0.25, height: 0.04 },
+  table: { left: 1, right: 2, y: 0.9, thickness: 0.05, legWidth: 0.05, legInset: 0.08 },
+  shelf: { left: 3.8, right: 4, y: 0.4, thickness: 0.04 },
+  tray: { left: 0, right: 0.6, bottom: 1.8, top: 2.1, thickness: 0.015, columns: 10 },
+  handrails: [{ x: 0.05, y: 1.2 }, { x: 3.95, y: 1.2 }],
+  cup: { x: 1.3, y: 0.95, width: 0.1, height: 0.1, mass: 0.3, bounce: 0.1, friction: 0.4 },
+  pen: { x: 1.7, y: 0.92, width: 0.14, height: 0.015, mass: 0.02, bounce: 0, friction: 0.4 },
+  book: { x: 1.5, y: 0.92, width: 0.2, height: 0.03, mass: 0.3, bounce: 0, friction: 0.7 },
+  gel: { radius: 0.015, mass: 0.005, friction: 0.3, bounce: 0 },
+  mannequin: { x: 1.9, y: 0.2, standingX: 2.5, standingY: 0.85, lyingAngle: Math.PI / 2,
+    width: 0.4, height: 1.7, headRadius: 0.10, friction: 0.8, bounce: 0 },
+  view: { hallwayShift: 140, viewport: { x: 90, y: 170 }, blinkPeriod: 0.5, vectorLength: 0.45,
+    lineWidth: 1, coatWidth: 2, streakWidth: 3, wipeWidth: 5, poolAlpha: 0.45, wipeAlpha: 0.2,
+    splashScale: 0.4, wipeArcStart: Math.PI, wipeArcEnd: 2 * Math.PI, arcSegments: 24 },
+  colors: { background: 0x15191d, room: 0x252c32, static: 0x87939d, door: 0x53616b,
+    cup: 0xe5e1d5, pen: 0xe4c269, book: 0x91b4c9, gel: 0x7dae8f, mannequin: 0xa2adb6,
+    water: 0x719ec1, coated: 0x71e7a2, warning: 0xe8b861, bolt: 0xe2cc9c },
+  ui: { width: 310, refreshInterval: 0.1, messageLimit: 8 },
+  debug: { gMax: 20, timeScales: [1, 10, 60], boltForceMax: 24, boltMassMax: 5,
+    dryMin: 30, dryMax: 1200, mannequinMassMax: 100, gelMax: 60 },
+};
+
+function clockText(t, p = PARAMS) {
+  const whole = Math.floor(t + p.epsilon) % p.secondsPerDay;
+  return [Math.floor(whole / p.secondsPerHour), Math.floor(whole / p.secondsPerMinute) % p.secondsPerMinute,
+    whole % p.secondsPerMinute].map(n => String(n).padStart(2, '0')).join(':');
+}
+
+
+// ===== src/rules/bolt.js =====
+class Bolt {
+  constructor(params) { this.p = params; this.s = 0; this.velocity = 0; }
+  set(s) {
+    if (!Number.isFinite(s)) return false;
+    this.s = Math.max(0, Math.min(this.p.boltTravel, s)); this.velocity = 0; return true;
+  }
+  step(dt, gravityUnit) {
+    const force = this.p.boltMass * this.p.g * gravityUnit.x;
+    if (Math.abs(force) <= this.p.boltDetent) { this.velocity = 0; return null; }
+    const acceleration = (force - Math.sign(force) * this.p.boltDetent) / this.p.boltMass;
+    const before = this.s;
+    this.s += this.velocity * dt + acceleration * dt * dt / 2;
+    this.velocity += acceleration * dt;
+    this.s = Math.max(0, Math.min(this.p.boltTravel, this.s));
+    if (this.s === 0 || this.s === this.p.boltTravel) this.velocity = 0;
+    if (before !== this.s && this.s === 0) return 'Chốt: chạm vị trí mở';
+    if (before !== this.s && this.s === this.p.boltTravel) return 'Chốt: chạm vị trí đóng';
+    return null;
+  }
+}
+
+// ===== src/rules/coat.js =====
+class Coat {
+  constructor(params) { this.p = params; this.gels = new Map(); this.coated = new Map(); }
+  step(t, objects) {
+    const gel = objects.filter(o => o.kind === 'gel');
+    for (const particle of gel) {
+      const state = this.gels.get(particle.id) || { stillSince: null, settledAt: null, firstSettledAt: null };
+      if (particle.speed >= this.p.gelStopSpeed) { state.stillSince = null; state.settledAt = null; }
+      else {
+        state.stillSince ??= t;
+        if (state.settledAt === null && t - state.stillSince >= this.p.gelStopTime - this.p.epsilon) {
+          state.settledAt = t; state.firstSettledAt ??= t;
+        }
+      }
+      this.gels.set(particle.id, state);
+    }
+    for (const object of objects.filter(o => o.kind !== 'gel')) {
+      if (this.coated.has(object.id)) continue;
+      const count = gel.filter(particle => {
+        const state = this.gels.get(particle.id);
+        return state.settledAt !== null && state.firstSettledAt > object.bornAt
+          && Math.hypot(particle.x - object.x, particle.y - object.y) <= this.p.coatRadius;
+      }).length;
+      if (count >= this.p.gelCoatMin) this.coated.set(object.id, t);
+    }
+  }
+}
+
+// ===== src/rules/cycle.js =====
+
+class Cycle {
+  constructor(params) {
+    this.p = params; this.now = params.clockStart; this.state = 'IDLE'; this.direction = 'DOWN';
+    this.target = 'DOWN'; this.deadline = Infinity; this.unlockAt = -Infinity; this.readyAt = -Infinity;
+    this.door = { isOpen: params.doorIsOpen, locked: false }; this.scheduleEntry = null;
+    this.log = []; this.messages = []; this.commands = [];
+  }
+  record(event) { this.log.push({ t: this.now, event, origin: 'local' }); }
+  valid(dir, duration) {
+    return Object.hasOwn(DIRECTIONS, dir) && Number.isFinite(duration) && duration >= this.p.durationMin && duration <= this.p.durationMax
+      && duration > this.p.warnTime + 2 * this.p.zeroGTime;
+  }
+  reject(text) { this.messages.push(text); return false; }
+  start(dir, duration, scheduled = false) {
+    if (!this.valid(dir, duration)) return this.reject('Từ chối: hướng / thời lượng không hợp lệ');
+    if (this.door.isOpen) return this.reject('Từ chối: cửa đang mở');
+    if (this.state !== 'IDLE' || this.door.locked) return this.reject('Từ chối: chu kỳ chưa kết thúc');
+    if (this.p.cooldownEnabled && this.now < this.readyAt - this.p.epsilon) return this.reject('Từ chối: đang cooldown');
+    this.target = dir; this.duration = duration; this.scheduled = scheduled;
+    this.state = 'WARN'; this.door.locked = true; this.deadline = this.now + this.p.warnTime;
+    this.returnAt = this.deadline + duration;
+    this.messages.push('Còi: cảnh báo xoay — cửa đã khóa');
+    return true;
+  }
+  schedule(atSeconds, dir, duration) {
+    if (!this.valid(dir, duration) || !Number.isFinite(atSeconds) || atSeconds - this.p.warnTime < this.now - this.p.epsilon)
+      return this.reject('Từ chối: lịch không hợp lệ / không đủ thời gian cảnh báo');
+    if (this.door.isOpen) return this.reject('Từ chối: cửa đang mở');
+    this.scheduleEntry = { atSeconds, dir, duration, fired: false }; this.record('SCHEDULE_EDIT');
+    return true;
+  }
+  setDoorOpen(value) {
+    if (value && this.door.locked) return this.reject('Từ chối: cửa đang khóa');
+    this.door.isOpen = value; this.p.doorIsOpen = value; return true;
+  }
+  canEnter() {
+    if (this.door.locked) return this.reject('Từ chối: cửa đang khóa');
+    return true;
+  }
+  stop() {
+    if (this.state === 'IDLE') { this.scheduleEntry = null; return true; }
+    if (this.state === 'WARN' || (this.state === 'ZERO_G' && !this.returning)) {
+      this.direction = 'DOWN'; this.finish();
+    } else if (this.state === 'ACTIVE') this.warnReturn();
+    return true;
+  }
+  warnReturn() {
+    this.state = 'WARN_RETURN'; this.deadline = this.now + this.p.warnTime;
+    this.messages.push('Còi: cảnh báo trả về — cửa vẫn khóa');
+  }
+  finish() {
+    this.state = 'IDLE'; this.deadline = Infinity; this.direction = 'DOWN'; this.returning = false;
+    this.unlockAt = this.now + this.p.doorUnlockDelay; this.readyAt = this.now + this.p.cooldown;
+    this.record('RETURN'); this.commands.push({ type: 'GRAVITY', dir: 'DOWN' });
+  }
+  transition() {
+    if (this.state === 'WARN' || this.state === 'WARN_RETURN') {
+      this.returning = this.state === 'WARN_RETURN';
+      if (!this.returning) this.record(this.scheduled ? 'SCHEDULED_START' : 'MANUAL_START');
+      this.state = 'ZERO_G'; this.direction = null; this.deadline = this.now + this.p.zeroGTime;
+      this.commands.push({ type: 'ZERO_G' });
+    } else if (this.state === 'ZERO_G') {
+      if (this.returning) this.finish();
+      else {
+        this.state = 'ACTIVE'; this.direction = this.target; this.deadline = this.returnAt - this.p.warnTime - this.p.zeroGTime;
+        this.commands.push({ type: 'GRAVITY', dir: this.direction });
+      }
+    } else if (this.state === 'ACTIVE') this.warnReturn();
+  }
+  step(dt) {
+    if (!Number.isFinite(dt) || dt < 0) throw new RangeError('dt phải hữu hạn và không âm');
+    const end = this.now + dt;
+    while (true) {
+      const scheduledAt = this.scheduleEntry && !this.scheduleEntry.fired ? this.scheduleEntry.atSeconds - this.p.warnTime : Infinity;
+      const unlock = this.door.locked && this.state === 'IDLE' ? this.unlockAt : Infinity;
+      const next = Math.min(this.deadline, scheduledAt, unlock);
+      if (next > end + this.p.epsilon) break;
+      this.now = next;
+      if (next === scheduledAt) {
+        const s = this.scheduleEntry; s.fired = true; this.start(s.dir, s.duration, true);
+      } else if (next === unlock) this.door.locked = false;
+      else this.transition();
+    }
+    this.now = end;
+    return this.commands.splice(0);
+  }
+  gravity() { return this.direction ? DIRECTIONS[this.direction] : { x: 0, y: 0 }; }
+}
+
+// ===== src/rules/liquid.js =====
+const floorFor = { DOWN: 'FLOOR', UP: 'CEIL', WEST: 'WEST', EAST: 'EAST' };
+const isFloor = (surface, dir) => surface === floorFor[dir] || surface === 'TABLE' && dir === 'DOWN'
+  || surface === 'SHELF' && ['DOWN', 'EAST'].includes(dir);
+
+class Liquid {
+  constructor(params) { this.p = params; this.decals = []; this.version = 0; }
+  add(decal) { this.decals.push(decal); this.version++; return decal; }
+  spill(surface, point, volume, color, t, dir) {
+    if (!Number.isFinite(volume) || volume <= 0 || !['FLOOR', 'TABLE', 'SHELF', 'TRAY', 'CEIL', 'WEST', 'EAST'].includes(surface)
+      || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return null;
+    const base = { surface, point: { ...point }, volume, color, t0: t, wetness: 1 };
+    const radius = this.p.poolRadiusPerLitre * Math.sqrt(volume);
+    if (isFloor(surface, dir)) return this.add({ ...base, type: 'POOL', floor: floorFor[dir], radius });
+    this.add({ ...base, type: 'SPLASH', radius: radius * this.p.view.splashScale });
+    return this.add({ ...base, type: 'STREAK', end: this.flowEnd(point, dir, this.p.streakLength) });
+  }
+  flowEnd(point, dir, length) {
+    if (dir === 'DOWN') return { x: point.x, y: Math.max(0, point.y - length) };
+    if (dir === 'UP') return { x: point.x, y: Math.min(this.p.room.height, point.y + length) };
+    if (dir === 'WEST') return { x: Math.max(0, point.x - length), y: point.y };
+    return { x: Math.min(this.p.room.width, point.x + length), y: point.y };
+  }
+  changeDirection(dir, t) {
+    for (const pool of [...this.decals]) {
+      if (pool.type !== 'POOL' || pool.wetness <= 0 || pool.floor === floorFor[dir]) continue;
+      const length = dir === 'DOWN' && ['WEST', 'EAST'].includes(pool.floor) ? pool.point.y : this.p.streakLength * pool.wetness;
+      this.add({ type: 'STREAK', surface: pool.surface, floor: pool.floor, point: { ...pool.point }, end: this.flowEnd(pool.point, dir, length),
+        wetness: pool.wetness, volume: pool.volume, color: pool.color, t0: t });
+      pool.radius *= Math.sqrt(this.p.poolShrink); pool.volume *= this.p.poolShrink;
+      this.version++;
+    }
+  }
+  step(dt) { for (const decal of this.decals) decal.wetness = Math.max(0, decal.wetness - dt / this.p.dryTime); }
+  wipe(point, t) {
+    this.decals = this.decals.filter(d => Math.hypot(d.point.x - point.x, d.point.y - point.y) > this.p.wipeRadius);
+    return this.add({ type: 'WIPE', point: { ...point }, radius: this.p.wipeRadius, color: this.p.colors.water, t0: t, wetness: 0 });
+  }
+}
+
+// ===== src/world/room.js =====
+function toScreen(point, p) {
+  return { x: p.canvas.origin.x + point.x * p.pixelsPerMetre, y: p.canvas.origin.y - point.y * p.pixelsPerMetre };
+}
+
+function toWorld(point, p) {
+  const origin = toScreen({ x: 0, y: 0 }, p), unit = toScreen({ x: 1, y: 1 }, p);
+  return { x: (point.x - origin.x) / (unit.x - origin.x), y: (point.y - origin.y) / (unit.y - origin.y) };
+}
+
+function createRoom(scene, p) {
+  const M = Phaser.Physics.Matter.Matter;
+  const bodies = [];
+  function rectangle(x, y, width, height, surface, name) {
+    const point = toScreen({ x, y }, p);
+    const c = p.collisionCategories;
+    const body = M.Bodies.rectangle(point.x, point.y, width * p.pixelsPerMetre, height * p.pixelsPerMetre,
+      { isStatic: true, friction: p.room.friction, label: name,
+        collisionFilter: { category: surface === 'TABLE' ? c.table : c.world, mask: c.world | c.table | c.loose | c.mannequin } });
+    body.plugin = { surface, name }; bodies.push(body); return body;
+  }
+  const { width: w, height: h, wall: d } = p.room;
+  rectangle(w / 2, -d / 2, w + 2 * d, d, 'FLOOR', 'Sàn');
+  rectangle(w / 2, h + d / 2, w + 2 * d, d, 'CEIL', 'Trần');
+  rectangle(-d / 2, h / 2, d, h, 'WEST', 'Tường Tây');
+  rectangle(w + d / 2, h / 2, d, h, 'EAST', 'Tường Đông');
+  const table = p.table;
+  rectangle((table.left + table.right) / 2, table.y - table.thickness / 2, table.right - table.left, table.thickness, 'TABLE', 'Mặt bàn');
+  for (const x of [table.left + table.legInset, table.right - table.legInset])
+    rectangle(x, (table.y - table.thickness) / 2, table.legWidth, table.y - table.thickness, 'TABLE', 'Chân bàn');
+  const shelf = p.shelf;
+  rectangle((shelf.left + shelf.right) / 2, shelf.y - shelf.thickness / 2, shelf.right - shelf.left, shelf.thickness, 'SHELF', 'Thanh giá');
+  const tray = p.tray;
+  for (const y of [tray.bottom, tray.top]) rectangle((tray.left + tray.right) / 2, y, tray.right - tray.left, tray.thickness, 'TRAY', 'Khay gel');
+  M.World.add(scene.matter.world.localWorld, bodies);
+  const graphics = scene.add.graphics();
+  const topLeft = toScreen({ x: 0, y: h }, p);
+  graphics.fillStyle(p.colors.room).fillRect(topLeft.x, topLeft.y, w * p.pixelsPerMetre, h * p.pixelsPerMetre);
+  const door = toScreen({ x: p.door.x - p.door.width / 2, y: p.door.y + p.door.height / 2 }, p);
+  graphics.fillStyle(p.colors.door, p.view.poolAlpha).fillRect(door.x, door.y, p.door.width * p.pixelsPerMetre, p.door.height * p.pixelsPerMetre);
+  const window = toScreen({ x: p.window.x - p.window.width / 2, y: p.window.y + p.window.height / 2 }, p);
+  graphics.lineStyle(p.view.lineWidth, p.colors.static).strokeRect(window.x, window.y, p.window.width * p.pixelsPerMetre, p.window.height * p.pixelsPerMetre);
+  graphics.fillStyle(p.colors.static);
+  for (const body of bodies) graphics.fillPoints(body.vertices, true);
+  for (const rail of p.handrails) {
+    const point = toScreen(rail, p);
+    graphics.fillCircle(point.x, point.y, p.bolt.height * p.pixelsPerMetre);
+  }
+  return { bodies, graphics };
+}
+
+// ===== src/world/objects.js =====
+
+class Objects {
+  constructor(scene, params, now) {
+    this.scene = scene; this.p = params; this.M = Phaser.Physics.Matter.Matter;
+    this.bodies = []; this.serial = 0; this.anchorConstraint = null;
+    for (const kind of ['cup', 'pen', 'book', 'mannequin']) this.add(kind, now);
+    const tray = params.tray, gel = params.gel;
+    for (let i = 0; i < params.gelCount; i++) {
+      const x = tray.left + gel.radius * (2 * (i % tray.columns) + 1);
+      const y = tray.bottom + tray.thickness / 2 + gel.radius * (2 * Math.floor(i / tray.columns) + 1);
+      this.add('gel', now, { x, y });
+    }
+  }
+  add(kind, now, position = this.p[kind]) {
+    if (kind === 'mannequin' && this.p.mannequinPose === 'standing')
+      position = { x: this.p.mannequin.standingX, y: this.p.mannequin.standingY };
+    const p = this.p, M = this.M, config = p[kind], point = toScreen(position, p);
+    const c = p.collisionCategories;
+    const options = { friction: config.friction, restitution: config.bounce, frictionAir: p.airFriction,
+      sleepThreshold: p.sleepThreshold, label: kind,
+      collisionFilter: { category: kind === 'mannequin' ? c.mannequin : c.loose,
+        mask: c.world | c.loose | c.mannequin | (kind === 'mannequin' ? 0 : c.table) } };
+    let body;
+    if (kind === 'gel') body = M.Bodies.circle(point.x, point.y, config.radius * p.pixelsPerMetre, options);
+    else if (kind === 'mannequin') {
+      const torso = M.Bodies.rectangle(point.x, point.y, config.width * p.pixelsPerMetre, config.height * p.pixelsPerMetre, options);
+      const head = toScreen({ x: position.x, y: position.y + config.height / 2 + config.headRadius }, p);
+      body = M.Body.create({ ...options, parts: [torso, M.Bodies.circle(head.x, head.y, config.headRadius * p.pixelsPerMetre, options)] });
+      if (p.mannequinPose === 'lying') M.Body.rotate(body, config.lyingAngle);
+      M.Body.setPosition(body, point);
+    } else body = M.Bodies.rectangle(point.x, point.y, config.width * p.pixelsPerMetre, config.height * p.pixelsPerMetre, options);
+    M.Body.setMass(body, kind === 'mannequin' ? p.mannequinMass : config.mass);
+    body.plugin = { kind, id: `${kind}-${++this.serial}`, bornAt: now, volume: kind === 'cup' ? p.waterVolume : 0 };
+    for (const part of body.parts) part.plugin = body.plugin;
+    M.World.add(this.scene.matter.world.localWorld, body); this.bodies.push(body);
+    return body;
+  }
+  anchor(enabled) {
+    const p = this.p, M = this.M, body = this.bodies.find(b => b.plugin.kind === 'mannequin');
+    if (this.anchorConstraint) M.World.remove(this.scene.matter.world.localWorld, this.anchorConstraint);
+    this.anchorConstraint = null;
+    if (enabled) {
+      const position = toWorld(body.position, p);
+      const rail = p.handrails.reduce((a, b) => Math.hypot(a.x - position.x, a.y - position.y) < Math.hypot(b.x - position.x, b.y - position.y) ? a : b);
+      this.anchorConstraint = M.Constraint.create({ pointA: toScreen(rail, p), bodyB: body, stiffness: p.anchorStiffness });
+      M.World.add(this.scene.matter.world.localWorld, this.anchorConstraint);
+    }
+    p.mannequinAnchored = enabled;
+  }
+  snapshot() {
+    const p = this.p, M = this.M;
+    return this.bodies.map(body => {
+      const position = toWorld(body.position, p);
+      const a = toWorld(body.bounds.min, p), b = toWorld(body.bounds.max, p);
+      const velocity = M.Body.getVelocity(body);
+      const baseSeconds = M.Body._baseDelta / p.millisecondsPerSecond;
+      const unit = toScreen({ x: 1, y: 1 }, p), origin = toScreen({ x: 0, y: 0 }, p);
+      const vx = velocity.x / (unit.x - origin.x) / baseSeconds, vy = velocity.y / (unit.y - origin.y) / baseSeconds;
+      return { ...body.plugin, ...position, vx, vy, speed: body.isSleeping ? 0 : Math.hypot(vx, vy),
+        angle: body.angle, sleeping: body.isSleeping, mass: body.mass,
+        bounds: { min: { x: Math.min(a.x, b.x), y: Math.min(a.y, b.y) }, max: { x: Math.max(a.x, b.x), y: Math.max(a.y, b.y) } } };
+    });
+  }
+}
+
+// ===== src/view/decals.js =====
+
+class DecalsView {
+  constructor(scene, params) { this.p = params; this.graphics = scene.add.graphics(); this.version = -1; }
+  draw(liquid) {
+    this.graphics.setVisible(this.p.showDecals);
+    if (this.version === liquid.version) return;
+    this.version = liquid.version;
+    const p = this.p, g = this.graphics; g.clear();
+    for (const decal of liquid.decals) {
+      const point = toScreen(decal.point, p);
+      if (decal.type === 'STREAK') {
+        const end = toScreen(decal.end, p);
+        g.lineStyle(p.view.streakWidth, decal.color, p.view.poolAlpha).lineBetween(point.x, point.y, end.x, end.y);
+      } else if (decal.type === 'WIPE') {
+        g.lineStyle(p.view.wipeWidth, decal.color, p.view.wipeAlpha).beginPath();
+        g.arc(point.x, point.y, decal.radius * p.pixelsPerMetre, p.view.wipeArcStart, p.view.wipeArcEnd, false, p.view.arcSegments);
+        g.strokePath();
+      } else g.fillStyle(decal.color, p.view.poolAlpha).fillCircle(point.x, point.y, decal.radius * p.pixelsPerMetre);
+    }
+  }
+}
+
+// ===== src/view/hallway.js =====
+
+class Hallway {
+  constructor(scene, params) {
+    this.p = params; this.inside = true; this.main = scene.cameras.main;
+    const p = params;
+    const side = p.window.width * p.pixelsPerMetre * p.windowZoom;
+    const height = p.window.height * p.pixelsPerMetre * p.windowZoom;
+    this.cover = scene.add.graphics().setDepth(1).setVisible(false);
+    this.cover.fillStyle(p.colors.door).fillRect(0, 0, p.canvas.width, p.canvas.height);
+    this.cover.lineStyle(p.view.lineWidth, p.colors.static).strokeRect(p.view.viewport.x + p.view.hallwayShift, p.view.viewport.y, side, height);
+    this.windowCamera = scene.cameras.add(p.view.viewport.x, p.view.viewport.y, side, height).setVisible(false);
+    this.windowCamera.setZoom(Math.min(side / (p.room.width * p.pixelsPerMetre), height / (p.room.height * p.pixelsPerMetre)));
+    this.windowCamera.centerOn(toScreen({ x: p.room.width / 2, y: p.room.height / 2 }, p).x, toScreen({ x: p.room.width / 2, y: p.room.height / 2 }, p).y);
+    const maskShape = scene.make.graphics({ x: 0, y: 0 }, false);
+    maskShape.fillRect(p.view.viewport.x, p.view.viewport.y, side, height);
+    this.mask = maskShape.createGeometryMask();
+    this.windowCamera.setMask(this.mask);
+    this.windowCamera.ignore(this.cover);
+  }
+  leave(cycle) {
+    if (!cycle.canEnter()) return false;
+    this.inside = false; this.cover.setVisible(true); this.main.setScroll(this.p.view.hallwayShift, 0);
+    this.windowCamera.setVisible(true); return true;
+  }
+  enter(cycle) {
+    if (!cycle.canEnter()) return false;
+    this.inside = true; this.cover.setVisible(false); this.main.setScroll(0, 0);
+    this.windowCamera.setVisible(false); return true;
+  }
+}
+
+// ===== src/view/panel.js =====
+
+async function createPanel(app) {
+  const { default: GUI } = await import('https://cdn.jsdelivr.net/npm/lil-gui@0.20.0/+esm');
+  const p = app.params;
+  const gui = new GUI({ title: 'Debug · SI (m, s, kg, N)', width: p.ui.width });
+  const gravity = gui.addFolder('Trọng lực');
+  const actions = {
+    start: () => app.start(p.direction, p.duration), stop: () => app.stop(),
+    schedule: () => {
+      const match = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(p.scheduleAt);
+      if (!match || +match[1] >= p.secondsPerDay / p.secondsPerHour || +match[2] >= p.secondsPerMinute || +(match[3] || 0) >= p.secondsPerMinute)
+        return app.message('Giờ hẹn không hợp lệ (HH:MM:SS).');
+      app.schedule(+match[1] * p.secondsPerHour + +match[2] * p.secondsPerMinute + +(match[3] || 0), p.direction, p.duration);
+    },
+    pour: () => { app.tool = 'pour'; }, wipe: () => { app.tool = 'wipe'; }, drag: () => { app.tool = 'drag'; },
+    reset: () => app.reset(), cup: () => app.addObject('cup'), pen: () => app.addObject('pen'), book: () => app.addObject('book'),
+    anchor: () => app.anchor(!p.mannequinAnchored),
+  };
+  for (const dir of Object.keys(DIRECTIONS)) gravity.add({ [dir]: () => { p.direction = dir; } }, dir);
+  gravity.add(p, 'direction', Object.keys(DIRECTIONS)).name('Hướng').listen();
+  gravity.add(p, 'g', 0, p.debug.gMax).name('g (m/s²)');
+  gravity.add(p, 'duration', p.durationMin, p.durationMax).name('Chu kỳ tới RETURN (s)');
+  gravity.add(actions, 'start').name('Start'); gravity.add(actions, 'stop').name('Stop / trả về an toàn');
+  gravity.add(p, 'scheduleAt').name('Hẹn lúc'); gravity.add(actions, 'schedule').name('Ghi lịch');
+  gravity.add(p, 'doorIsOpen').name('Cửa đang mở').listen().onChange(value => app.setDoorOpen(value));
+  const timing = gui.addFolder('Thời gian');
+  timing.add(p, 'timeScale', p.debug.timeScales).name('Tốc độ').listen();
+  timing.add(p, 'cooldownEnabled').name('Bật cooldown');
+  for (const key of ['warnTime', 'zeroGTime', 'doorUnlockDelay', 'cooldown']) timing.add(p, key, 0, p.cooldown);
+  const bolt = gui.addFolder('Chốt');
+  bolt.add(p, 'boltDetent', 0, p.debug.boltForceMax).name('Lực lẫy (N)');
+  bolt.add(p, 'boltMass', p.epsilon, p.debug.boltMassMax).name('Khối lượng (kg)');
+  bolt.add(p, 'boltTravel', p.epsilon, p.room.width).name('Hành trình (m)').onChange(() => app.bolt.set(app.bolt.s));
+  const manual = { s: app.bolt.s };
+  bolt.add(manual, 's', 0, p.boltTravel).name('Kéo tay (IDLE)').onChange(s => app.setBolt(s));
+  const liquid = gui.addFolder('Chất lỏng');
+  liquid.add(p, 'dryTime', p.debug.dryMin, p.debug.dryMax).name('Khô sau (s)');
+  liquid.add(p, 'streakLength', 0, p.room.width).name('Vệt tối đa (m)');
+  liquid.add(p, 'waterVolume', 0, 1).name('Lượng nước (L)');
+  liquid.add(p, 'poolRadiusPerLitre', 0, 1).name('Hệ số bán kính');
+  liquid.add(actions, 'pour').name('Đổ tại chuột'); liquid.add(actions, 'wipe').name('Lau tại chuột');
+  liquid.add(actions, 'drag').name('Kéo vật');
+  const objects = gui.addFolder('Vật');
+  objects.add(actions, 'reset').name('Reset vật + luật');
+  objects.add(p, 'mannequinPose', ['lying', 'standing']).name('Tư thế (reset để áp dụng)');
+  for (const key of ['cup', 'pen', 'book']) objects.add(actions, key).name(`Thêm ${key}`);
+  objects.add(actions, 'anchor').name('Neo / thả neo hình nộm');
+  objects.add(p, 'mannequinMass', p.epsilon, p.debug.mannequinMassMax).onChange(() => app.setMannequinMass());
+  objects.add(p, 'gelCount', 0, p.debug.gelMax, 1).name('Hạt gel (reset để áp dụng)');
+  objects.add(p, 'gelCoatMin', 1, p.debug.gelMax, 1);
+  objects.add(p, 'coatRadius', 0, p.room.width).name('Bán kính phủ (m)');
+  const display = gui.addFolder('Hiển thị');
+  for (const key of ['showDecals', 'showCoated', 'showGravity']) display.add(p, key);
+  display.add(p, 'windowZoom').name('Ô kính (reset để áp dụng)');
+  const geometry = gui.addFolder('PARAMS bổ sung (reset để áp dụng)').close();
+  for (const key of ['physicsStep', 'airFriction', 'zeroGNoise', 'gelStopSpeed', 'gelStopTime', 'coatInterval', 'wipeRadius']) geometry.add(p, key);
+  for (const key of ['collisionCategories', 'room', 'door', 'window', 'bolt', 'table', 'shelf', 'tray', 'cup', 'pen', 'book', 'gel', 'mannequin']) {
+    const folder = geometry.addFolder(key).close();
+    for (const field of Object.keys(p[key])) folder.add(p[key], field);
+  }
+  return gui;
+}
+
+// ===== src/main.js =====
+
+
+
+
+
+
+
+
+
+
+class Sandbox extends Phaser.Scene {
+  create() {
+    this.params = PARAMS; this.M = Phaser.Physics.Matter.Matter; this.engine = this.matter.world.engine;
+    document.documentElement.style.setProperty('--canvas-width', `${PARAMS.canvas.width}px`);
+    document.documentElement.style.setProperty('--panel-width', `${PARAMS.ui.width}px`);
+    this.paused = false; this.tool = 'drag'; this.messages = []; this.frameSamples = [];
+    this.lastFrame = performance.now(); this.guiTime = 0; this.reset();
+    window.proto = this;
+    createPanel(this).catch(error => this.message(`Không tải được panel CDN: ${error.message}`));
+    this.input.on('pointerdown', pointer => {
+      if (this.tool === 'drag' || !this.hallway.inside) return;
+      const world = pointer.positionToCamera(this.cameras.main);
+      const point = toWorld(world, this.params), p = this.params;
+      if (point.x < 0 || point.x > p.room.width || point.y < 0 || point.y > p.room.height) return;
+      if (this.tool === 'wipe') this.liquid.wipe(point, this.cycle.now);
+      else {
+        const targets = [
+          ['FLOOR', { x: point.x, y: 0 }], ['CEIL', { x: point.x, y: p.room.height }],
+          ['WEST', { x: 0, y: point.y }], ['EAST', { x: p.room.width, y: point.y }],
+          ['TABLE', { x: Math.max(p.table.left, Math.min(p.table.right, point.x)), y: p.table.y }],
+          ['SHELF', { x: Math.max(p.shelf.left, Math.min(p.shelf.right, point.x)), y: p.shelf.y }],
+          ...[p.tray.bottom, p.tray.top].map(y => ['TRAY', { x: Math.max(p.tray.left, Math.min(p.tray.right, point.x)), y }]),
+        ];
+        targets.sort((a, b) => Math.hypot(a[1].x - point.x, a[1].y - point.y) - Math.hypot(b[1].x - point.x, b[1].y - point.y));
+        this.pour(targets[0][0], targets[0][1]);
+      }
+    });
+    document.querySelector('#leave').onclick = () => { this.hallway.leave(this.cycle); this.refresh(); };
+    document.querySelector('#enter').onclick = () => { this.hallway.enter(this.cycle); this.refresh(); };
+  }
+  reset() {
+    const p = this.params;
+    if (this.room) {
+      this.mouse.destroy();
+      for (const layer of [this.room.graphics, this.objectGraphics, this.decals.graphics, this.hallway.cover]) layer.destroy();
+      this.cameras.remove(this.hallway.windowCamera);
+      this.hallway.mask.destroy();
+      this.M.World.clear(this.engine.world, false); this.M.Engine.clear(this.engine);
+      this.matter.world.off('collisionstart', this.collisionHandler);
+    }
+    this.cameras.main.setScroll(0, 0);
+    this.cycle = new Cycle(p); this.bolt = new Bolt(p); this.liquid = new Liquid(p); this.coat = new Coat(p);
+    this.room = createRoom(this, p); this.objects = new Objects(this, p, this.cycle.now);
+    this.decals = new DecalsView(this, p); this.objectGraphics = this.add.graphics();
+    this.hallway = new Hallway(this, p);
+    this.mouse = this.matter.add.mouseSpring({ length: 0, stiffness: p.anchorStiffness });
+    this.engine.enableSleeping = true; this.engine.positionIterations = p.positionIterations;
+    this.engine.velocityIterations = p.velocityIterations; this.engine.constraintIterations = p.constraintIterations;
+    this.gravityDirection = 'DOWN'; this.applyGravity('DOWN');
+    this.noiseState = p.noiseSeed; this.coatNext = this.cycle.now; this.accumulator = 0;
+    this.messages = []; this.frameSamples = []; this.metrics = { collisions: [], transitions: [], substeps: 0 };
+    this.collisionHandler = event => this.collisions(event);
+    this.matter.world.on('collisionstart', this.collisionHandler);
+    if (p.mannequinAnchored) this.objects.anchor(true);
+    this.refresh(); this.draw();
+  }
+  message(text) { this.messages.push(text); this.refresh(); return false; }
+  start(dir, duration) { const ok = this.cycle.start(dir, duration); this.refresh(); return ok; }
+  schedule(t, dir, duration) { const ok = this.cycle.schedule(t, dir, duration); this.refresh(); return ok; }
+  stop() { this.cycle.stop(); this.applyGravity(this.cycle.direction); this.refresh(); }
+  setDoorOpen(value) { const ok = this.cycle.setDoorOpen(value); this.params.doorIsOpen = this.cycle.door.isOpen; this.refresh(); return ok; }
+  setBolt(s) { if (this.cycle.state !== 'IDLE') return this.message('Từ chối: chỉ kéo chốt bằng tay khi IDLE'); return this.bolt.set(s); }
+  addObject(kind, position) { return this.objects.add(kind, this.cycle.now, position); }
+  anchor(enabled) { this.objects.anchor(enabled); }
+  setMannequinMass() { this.M.Body.setMass(this.objects.bodies.find(b => b.plugin.kind === 'mannequin'), this.params.mannequinMass); }
+  pour(surface, point, volume = this.params.waterVolume) {
+    return this.liquid.spill(surface, point, volume, this.params.colors.water, this.cycle.now, this.gravityDirection);
+  }
+  applyGravity(dir) {
+    const p = this.params, unit = DIRECTIONS[dir] || { x: 0, y: 0 };
+    const origin = toScreen({ x: 0, y: 0 }, p), screen = toScreen(unit, p);
+    this.engine.gravity.x = (screen.x - origin.x) / p.pixelsPerMetre;
+    this.engine.gravity.y = (screen.y - origin.y) / p.pixelsPerMetre;
+    this.engine.gravity.scale = p.g * p.pixelsPerMetre / p.millisecondsPerSecond ** 2;
+    this.gravityDirection = dir;
+  }
+  wake() { for (const body of this.objects.bodies) this.M.Sleeping.set(body, false); }
+  zeroGNoise() {
+    const p = this.params, M = this.M;
+    // Seeded perturbation keeps equal input runs reproducible at the rules boundary.
+    const random = () => { this.noiseState = (this.noiseState * 1664525 + 1013904223) >>> 0; return this.noiseState / 2 ** 32; };
+    for (const body of this.objects.bodies) {
+      const velocity = M.Body.getVelocity(body);
+      const speed = p.zeroGNoise * p.pixelsPerMetre * M.Body._baseDelta / p.millisecondsPerSecond;
+      M.Body.setVelocity(body, { x: velocity.x + (random() * 2 - 1) * speed, y: velocity.y + (random() * 2 - 1) * speed });
+    }
+  }
+  step(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0 || this.params.physicsStep <= 0) throw new RangeError('Thời gian / physicsStep không hợp lệ');
+    const p = this.params;
+    this.accumulator += seconds;
+    while (this.accumulator >= p.physicsStep - p.epsilon) {
+      const dt = p.physicsStep;
+      const commands = this.cycle.step(dt);
+      for (const command of commands) {
+        this.wake();
+        if (command.type === 'ZERO_G') { this.applyGravity(null); this.zeroGNoise(); }
+        else { this.applyGravity(command.dir); this.liquid.changeDirection(command.dir, this.cycle.now); }
+        this.metrics.transitions.push({ t: this.cycle.now, state: this.cycle.state, dir: this.gravityDirection });
+      }
+      this.applyGravity(this.gravityDirection);
+      this.engine.enableSleeping = this.cycle.state !== 'ZERO_G';
+      const boltMessage = this.bolt.step(dt, this.cycle.gravity());
+      if (boltMessage) this.messages.push(boltMessage);
+      this.mouse.constraint.stiffness = this.tool === 'drag' && this.hallway.inside ? p.anchorStiffness : 0;
+      this.M.Engine.update(this.engine, dt * p.millisecondsPerSecond);
+      this.liquid.step(dt);
+      if (this.cycle.now >= this.coatNext) {
+        this.coat.step(this.cycle.now, this.objects.snapshot());
+        this.coatNext = this.cycle.now + p.coatInterval;
+      }
+      for (const body of this.objects.bodies) {
+        if (body.plugin.kind === 'cup' && body.plugin.volume > 0 && this.gravityDirection && Math.abs(body.angle) > p.spillAngle) {
+          const point = toWorld(body.position, p);
+          const surface = { DOWN: 'FLOOR', UP: 'CEIL', WEST: 'WEST', EAST: 'EAST' }[this.gravityDirection];
+          if (surface === 'FLOOR') point.y = 0;
+          if (surface === 'CEIL') point.y = p.room.height;
+          if (surface === 'WEST') point.x = 0;
+          if (surface === 'EAST') point.x = p.room.width;
+          this.pour(surface, point, body.plugin.volume); body.plugin.volume = 0;
+        }
+      }
+      this.metrics.substeps++; this.accumulator -= dt;
+    }
+  }
+  collisions(event) {
+    const p = this.params;
+    for (const pair of event.pairs) {
+      for (const [part, other] of [[pair.bodyA, pair.bodyB], [pair.bodyB, pair.bodyA]]) {
+        const body = part.parent;
+        if (!body.plugin.kind || !other.isStatic) continue;
+        const point = toWorld(pair.collision.supports.find(Boolean) || body.position, p);
+        const hit = { t: this.cycle.now, id: body.plugin.id, kind: body.plugin.kind,
+          surface: other.plugin.surface, point, dir: this.gravityDirection };
+        this.metrics.collisions.push(hit);
+        if (body.plugin.kind === 'cup' && body.plugin.volume > 0 && this.gravityDirection) {
+          const collision = pair.collision;
+          const a = this.M.Body.getVelocity(collision.bodyA.parent), b = this.M.Body.getVelocity(collision.bodyB.parent);
+          // Matter's normal points from bodyB to bodyA; only closing velocity counts.
+          const speed = Math.max(0, (b.x - a.x) * collision.normal.x + (b.y - a.y) * collision.normal.y)
+            * p.millisecondsPerSecond / this.M.Body._baseDelta / p.pixelsPerMetre;
+          hit.normalSpeedMps = speed;
+          if (speed > p.spillSpeed + p.epsilon) {
+            this.pour(other.plugin.surface, point, body.plugin.volume); body.plugin.volume = 0;
+          }
+        }
+      }
+    }
+  }
+  draw() {
+    const p = this.params, g = this.objectGraphics; g.clear();
+    this.decals.draw(this.liquid);
+    for (const body of this.objects.bodies) {
+      g.fillStyle(p.colors[body.plugin.kind]);
+      for (const part of body.parts.length > 1 ? body.parts.slice(1) : body.parts) g.fillPoints(part.vertices, true);
+      if (p.showCoated && this.coat.coated.has(body.plugin.id)) {
+        g.lineStyle(p.view.coatWidth, p.colors.coated).strokeRect(body.bounds.min.x, body.bounds.min.y,
+          body.bounds.max.x - body.bounds.min.x, body.bounds.max.y - body.bounds.min.y);
+      }
+    }
+    const bolt = toScreen({ x: p.bolt.x + this.bolt.s, y: p.bolt.y }, p);
+    g.fillStyle(p.colors.bolt).fillRect(bolt.x - p.bolt.width * p.pixelsPerMetre / 2,
+      bolt.y - p.bolt.height * p.pixelsPerMetre / 2, p.bolt.width * p.pixelsPerMetre, p.bolt.height * p.pixelsPerMetre);
+    if (this.cycle.state.includes('WARN') && Math.floor(this.cycle.now / p.view.blinkPeriod) % 2 === 0)
+      g.lineStyle(p.view.coatWidth, p.colors.warning).strokeRect(p.canvas.origin.x, p.canvas.origin.y - p.room.height * p.pixelsPerMetre,
+        p.room.width * p.pixelsPerMetre, p.room.height * p.pixelsPerMetre);
+    if (p.showGravity) {
+      const from = toScreen({ x: p.room.width / 2, y: p.room.height / 2 }, p), unit = this.cycle.gravity();
+      const to = toScreen({ x: p.room.width / 2 + unit.x * p.view.vectorLength, y: p.room.height / 2 + unit.y * p.view.vectorLength }, p);
+      g.lineStyle(p.view.coatWidth, p.colors.warning).lineBetween(from.x, from.y, to.x, to.y);
+    }
+  }
+  refresh() {
+    const c = this.cycle, p = this.params, s = c.scheduleEntry;
+    document.querySelector('#status').textContent = `${clockText(c.now)} · ${c.state} · ${c.direction || 'ZERO G'} · ×${p.timeScale}\n`
+      + `Cửa: ${c.door.isOpen ? 'mở' : 'đóng'} / ${c.door.locked ? 'khóa hệ thống' : 'hết khóa hệ thống'} · Chốt: ${this.bolt.s.toFixed(3)} m\n`
+      + `Lịch hiện tại: ${s ? `${clockText(s.atSeconds)} — ${s.dir} — ${s.duration / p.secondsPerMinute}'` : 'chưa đặt'}\n`
+      + `Gel: ${this.objects.bodies.filter(b => b.plugin.kind === 'gel').length} · coated: ${this.coat.coated.size}`;
+    document.querySelector('#journal').textContent = c.log.map(entry => `${clockText(entry.t)} ${entry.event} (${entry.origin})`).join('\n');
+    document.querySelector('#messages').textContent = [...c.messages, ...this.messages].slice(-p.ui.messageLimit).join('\n');
+    document.querySelector('#enter').disabled = c.door.locked;
+    document.querySelector('#leave').disabled = c.door.locked;
+  }
+  update() {
+    const now = performance.now(), delta = (now - this.lastFrame) / this.params.millisecondsPerSecond;
+    this.lastFrame = now;
+    if (!this.paused) {
+      this.frameSamples.push({ real: now, delta, stepsBefore: this.metrics.substeps });
+      this.step(delta * Number(this.params.timeScale));
+    }
+    this.draw();
+    if (now - this.guiTime >= this.params.ui.refreshInterval * this.params.millisecondsPerSecond) { this.refresh(); this.guiTime = now; }
+  }
+  snapshot() {
+    return { now: this.cycle.now, state: this.cycle.state, dir: this.cycle.direction, door: { ...this.cycle.door }, bolt: this.bolt.s,
+      objects: this.objects.snapshot().map(o => ({ ...o, coatedAt: this.coat.coated.get(o.id) ?? null })),
+      decals: structuredClone(this.liquid.decals), log: structuredClone(this.cycle.log), messages: [...this.cycle.messages, ...this.messages],
+      hallway: { inside: this.hallway.inside, visible: this.hallway.windowCamera.visible, zoom: this.hallway.windowCamera.zoom },
+      transitions: [...this.metrics.transitions] };
+  }
+}
+
+new Phaser.Game({
+  type: Phaser.CANVAS, parent: 'canvas', width: PARAMS.canvas.width, height: PARAMS.canvas.height,
+  backgroundColor: PARAMS.colors.background, banner: false, audio: { noAudio: true },
+  physics: { default: 'matter', matter: { autoUpdate: false, enableSleeping: true } }, scene: Sandbox,
+});
+
+</script>
+</body>
+</html>

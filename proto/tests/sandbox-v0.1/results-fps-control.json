@@ -1,0 +1,23 @@
+[
+  {
+    "id": "T14",
+    "status": "FAIL",
+    "measured": {
+      "frames": 902,
+      "realSeconds": 30.00279999999702,
+      "fps": 30.06386070633706,
+      "frameMedianMs": 33.30000000447035,
+      "frameP95Ms": 34.900000005960464,
+      "frameMaxMs": 60.399999998509884,
+      "simulatedSeconds": 29.991666659683688,
+      "simulationRate": 0.9996289232900485,
+      "substeps": 3599,
+      "gelCount": 60,
+      "timeScale": 1,
+      "visibility": "visible",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "width": 960,
+      "height": 540
+    }
+  }
+]

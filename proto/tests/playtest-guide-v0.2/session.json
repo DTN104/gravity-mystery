@@ -1,0 +1,455 @@
+{
+  "date": "2026-10-11",
+  "mode": "Codex guided UI playtest, không phải playtest người thật",
+  "timeline": [
+    {
+      "elapsedSeconds": 5.848,
+      "label": "V1: XOAY NGAY Đông / 1 phút",
+      "events": "Còi — cửa đã khóa. Bám tay vịn.",
+      "notice": "",
+      "now": "Hiện tại: 21:55:30 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "21:55 · SÀN: XUỐNG · xoay sau 0:10 · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": false,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 36.601,
+      "label": "V1 ACTIVE: vũng trên tường Đông, hình nộm và gel tới tường",
+      "events": "Nước loang thành VŨNG TRÒN trên tường Đông — vì tường Đông đang là sàn.\n\nHình nộm rơi lên tường Đông.\n\nGel đổ khỏi khay, văng lên tường Đông.\n\nCa rơi lên tường Đông.\n\nBình nước rơi lên tường Đông.",
+      "notice": "",
+      "now": "Hiện tại: 21:56:01 · ▶ Đông · cửa: đóng",
+      "refusal": "",
+      "status": "21:56 · SÀN: ĐÔNG · về Xuống sau 0:39 · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": false,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4785.391,
+      "label": "V1: chọn sai một lần, nhận phản hồi thử lại",
+      "events": "Bình nước rơi lên tường Đông.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:02:21 · ▼ Xuống · cửa: đóng",
+      "quiz": "Quan sát R1 · Bạn rút ra điều gì?\n\nChưa chắc. Thử lại rồi xem.\n\nCa bị ném mạnh mới loang tròn.\nVũng tròn trên tường = tường đó từng là sàn.\nVết chảy xuống nghĩa là đổ từ trần.\nĐể thử thêm",
+      "refusal": "",
+      "status": "22:02 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": false,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4785.745,
+      "label": "V1 PASS: trả lời lại mở R1 và gạch thí nghiệm",
+      "events": "Bình nước rơi lên tường Đông.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:02:22 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:02 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4842.256,
+      "label": "V2 FAIL theo thứ tự hướng dẫn: Đổ đầy lại nhưng bình tự đổ hết; bấm sàn báo bình hết nước",
+      "events": "Còi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.\n\nNước loang thành vũng trên sàn.",
+      "notice": "Bình đã hết nước. Đổ đầy lại trên kệ.",
+      "now": "Hiện tại: 22:03:18 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:03 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4886.53,
+      "label": "V3: hẹn Đông / 1 phút lúc 22:7",
+      "events": "Còi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.\n\nNước loang thành vũng trên sàn.",
+      "notice": "",
+      "now": "Hiện tại: 22:04:02 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:04 · SÀN: XUỐNG · hẹn 22:07 (còn 2:58) · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4892.478,
+      "label": "V3: đang ngoài hành lang, tua tới gần giờ hẹn",
+      "events": "Còi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.\n\nNước loang thành vũng trên sàn.",
+      "notice": "",
+      "now": "Hiện tại: 22:04:28 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:04 · SÀN: XUỐNG · hẹn 22:07 (còn 2:32) · ×60 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4918.929,
+      "label": "R2 xuất hiện từ vũng do bình tự đổ; không tính là PASS thao tác đổ nước của V2",
+      "events": "Gel đổ khỏi khay, văng lên tường Đông.\n\nCa rơi lên tường Đông.\n\nSổ rơi lên tường Đông.\n\nBút rơi lên tường Đông.\n\nHình nộm rơi lên tường Đông.",
+      "notice": "",
+      "now": "Hiện tại: 22:07:11 · ▶ Đông · cửa: đóng",
+      "quiz": "Quan sát R2 · Bạn rút ra điều gì?\n\nVệt kéo ngang = có người lôi vật nặng qua.\nNước luôn chảy về phía cửa.\nVệt kéo ngang trên sàn = chất lỏng đã nằm trên sàn trước khi xoay.\nĐể thử thêm",
+      "refusal": "",
+      "status": "22:07 · SÀN: ĐÔNG · về Xuống sau 0:49 · ×1 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": false,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4958.356,
+      "label": "V3: kiểm tra R4 trong ACTIVE sau V1",
+      "events": "Ca rơi lên tường Đông.\n\nSổ rơi lên tường Đông.\n\nBút rơi lên tường Đông.\n\nHình nộm rơi lên tường Đông.\n\nCòi — sắp trả về Xuống.",
+      "notice": "",
+      "now": "Hiện tại: 22:07:50 · ▶ Đông · cửa: đóng",
+      "quiz": "Quan sát R4 · Bạn rút ra điều gì?\n\nQua ô kính không thấy được tường bên.\nTrong lúc xoay, không ai 'ở trên sàn' — họ ở trên bức tường đang là sàn.\nNgười bám tay vịn thì vẫn đứng trên sàn.\nĐể thử thêm",
+      "refusal": "",
+      "status": "22:07 · SÀN: ĐÔNG · về Xuống sau 0:10 · ×1 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4967.666,
+      "label": "V3: mở được R4 bằng quan sát qua kính",
+      "events": "Hình nộm rơi lên tường Đông.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:08:00 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:08 · SÀN: XUỐNG · mở khóa sau 0:03 · ×1 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4974.832,
+      "label": "V3: cửa hết khóa hệ thống nhưng chốt chặn; intercom xuất hiện",
+      "events": "Hình nộm rơi lên tường Đông.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "Chốt bên trong đã cài. Không mở được từ hành lang.",
+      "now": "Hiện tại: 22:08:07 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:08 · SÀN: XUỐNG · đang chờ · ×1 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4984.915,
+      "label": "V3: Lâm chờ cooldown; đồng hồ ×10",
+      "events": "Hình nộm rơi lên tường Đông.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:08:20 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:08 · SÀN: XUỐNG · đang chờ · ×10 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4991.781,
+      "label": "V3: chốt trượt MỞ dưới Tây, R3 xuất hiện",
+      "events": "Nước bắn lên tường Đông rồi chảy theo trọng lực.\n\nVũng trên sàn còn ướt, bị kéo thành vệt về phía TÂY.\n\nChốt cửa tự trượt sang MỞ.\n\nGel đổ khỏi khay, văng lên tường Tây.\n\nBình nước rơi lên tường Tây.",
+      "notice": "",
+      "now": "Hiện tại: 22:09:15 · ◀ Tây · cửa: đóng",
+      "quiz": "Quan sát R3 · Bạn rút ra điều gì?\n\nChốt chỉ trượt khi có người đẩy.\nCửa khóa là do chốt.\nTrọng lực ngang trùng trục chốt thì chốt tự trượt. Phòng khóa kín không cần ai ở trong.\nĐể thử thêm",
+      "refusal": "",
+      "status": "22:09 · SÀN: TÂY · về Xuống sau 0:56 · ×1 · hành lang",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": false,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 5019.246,
+      "label": "V3 PASS: sau chu kỳ Tây và hết khóa, vào lại phòng được",
+      "events": "Bình nước rơi lên tường Tây.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:10:17 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:10 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": true,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 5051.582,
+      "label": "V4: đặt bút mới vào gel đã dừng ở chân đống đồ",
+      "events": "Bình nước rơi lên tường Tây.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:10:50 · ▼ Xuống · cửa: đóng",
+      "quiz": "Quan sát R5 · Bạn rút ra điều gì?\n\nVật rơi sau khi gel văng thì nằm trên, sạch.\nBút nặng nên chìm xuống dưới gel.\nGel luôn phủ mọi thứ trong phòng.\nĐể thử thêm",
+      "refusal": "",
+      "status": "22:10 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": true,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": false,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 5067.867,
+      "label": "V4 PASS: mở R5; đủ 5 quy tắc, Thư hiện lời kết",
+      "dialogue": "Thư\n\nAnh nhanh hơn em hồi đó.\n\nXong",
+      "events": "Bình nước rơi lên tường Tây.\n\nCòi — sắp trả về Xuống.\n\nKhông trọng lực. Mọi thứ lơ lửng.\n\nVề XUỐNG. Sàn lại là sàn.\n\nVũng trên tường Đông chảy xuống thành vệt.",
+      "notice": "",
+      "now": "Hiện tại: 22:11:06 · ▼ Xuống · cửa: đóng",
+      "refusal": "",
+      "status": "22:11 · SÀN: XUỐNG · đang chờ · ×1 · trong buồng",
+      "tasks": [
+        {
+          "complete": true,
+          "text": "Ca nước: ca đã ở trên bàn. Chọn ▶ Đông, 1', rồi XOAY NGAY. Nhìn nước trên tường lúc xoay và khi trở về Xuống."
+        },
+        {
+          "complete": true,
+          "text": "Nước trên sàn: chọn Bình nước, bấm sát sàn để đổ. Chờ vài giây rồi xoay ▶ Đông. Nhìn vũng nước thay đổi."
+        },
+        {
+          "complete": true,
+          "text": "Qua ô kính: chọn ▶ Đông, 1'; nhập Giờ/Phút sau mốc “Sớm nhất có thể hẹn tiếp”, rồi + Thêm lịch. Ra hành lang trước còi, nhìn hình nộm và chốt. Khi cửa hết khóa, thử Vào phòng; nếu chốt chặn, bấm Intercom → Phòng điều khiển rồi chờ vào lại."
+        },
+        {
+          "complete": true,
+          "text": "Bút mới và gel: xoay ▶ Đông để gel văng khỏi khay. Chờ trở về Xuống và gel đứng yên, rồi Lấy bút mới → bấm vào đống gel. So sánh bút mới với vật có sẵn."
+        }
+      ]
+    }
+  ],
+  "pourControl": {
+    "bottle": "Bình nước · 0.4 L",
+    "events": "Nước loang thành vũng trên sàn.",
+    "notice": "",
+    "now": "Hiện tại: 21:55:14 · ▼ Xuống · cửa: đóng"
+  },
+  "controlR2": "Quan sát R2 · Bạn rút ra điều gì?\n\nVệt kéo ngang = có người lôi vật nặng qua.\nVệt kéo ngang trên sàn = chất lỏng đã nằm trên sàn trước khi xoay.\nNước luôn chảy về phía cửa.\nĐể thử thêm",
+  "finalRuleText": "Sổ quy tắc\nR1 · Vũng tròn trên tường = tường đó từng là sàn.\nR2 · Vệt kéo ngang trên sàn = chất lỏng đã nằm trên sàn trước khi xoay.\nR3 · Trọng lực ngang trùng trục chốt thì chốt tự trượt. Phòng khóa kín không cần ai ở trong.\nR4 · Trong lúc xoay, không ai 'ở trên sàn' — họ ở trên bức tường đang là sàn.\nR5 · Vật rơi sau khi gel văng thì nằm trên, sạch.\nĐóng sổ",
+  "journal": "21:55:40 MANUAL_START (local)\n21:56:40 RETURN (local)\n22:04:02 SCHEDULE_EDIT (local)\n22:07:00 SCHEDULED_START (local)\n22:08:00 RETURN (local)\n22:09:10 MANUAL_START (master / LAM)\n22:10:10 RETURN (master / LAM)",
+  "rootConsole": [],
+  "controlConsole": []
+}

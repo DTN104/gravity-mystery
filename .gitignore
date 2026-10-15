@@ -1,0 +1,19 @@
+# Local editor and automation state
+.DS_Store
+.idea/
+.playwright-cli/
+node_modules/
+
+# Local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Temporary snapshots; source and test fixtures remain tracked
+/_to_delete/
+/proto/_backup*/
+
+# Full-window Chrome captures remain local
+/proto/tests/playthrough-2026-10-15/*.jpg

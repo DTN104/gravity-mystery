@@ -1,0 +1,99 @@
+{
+  "id": "T16",
+  "hinge": false,
+  "pose": "standing",
+  "initial": {
+    "chunks": [
+      {
+        "segment": "torso",
+        "mass": 70,
+        "x": 2.5,
+        "y": 0.85,
+        "bounds": {
+          "min": {
+            "x": 2.3,
+            "y": -0.03935845263517649
+          },
+          "max": {
+            "x": 2.7,
+            "y": 1.8606415473648235
+          }
+        },
+        "verticalDegrees": 0,
+        "eastEdgeDistanceM": 1.2999999999999998
+      }
+    ],
+    "head": {
+      "x": 2.5,
+      "y": 1.7606415473648236
+    },
+    "gelCount": 60,
+    "gelOutsideStrip": 60,
+    "farthestGelFromEastM": 3.985,
+    "mannequinTableContacts": 0
+  },
+  "activeSeconds": 2.999999999301508,
+  "active": {
+    "chunks": [
+      {
+        "segment": "torso",
+        "mass": 70,
+        "x": 3.6797082492647313,
+        "y": 0.9244678059013682,
+        "bounds": {
+          "min": {
+            "x": 3.3462317685752145,
+            "y": 0.014997989970838716
+          },
+          "max": {
+            "x": 4.001844357559929,
+            "y": 1.9232540650521743
+          }
+        },
+        "verticalDegrees": 8.78457125467991,
+        "eastEdgeDistanceM": 0.0018443575599293993
+      }
+    ],
+    "head": {
+      "x": 3.81878116978226,
+      "y": 1.824427110851138
+    },
+    "gelCount": 60,
+    "gelOutsideStrip": 0,
+    "farthestGelFromEastM": 0.2964328860472265,
+    "mannequinTableContacts": 0
+  },
+  "activePass": true,
+  "return": {
+    "chunks": [
+      {
+        "segment": "torso",
+        "mass": 70,
+        "x": 3.4648920009504764,
+        "y": 0.889260993671399,
+        "bounds": {
+          "min": {
+            "x": 3.260420618912617,
+            "y": -0.001667233826515826
+          },
+          "max": {
+            "x": 3.6694503195275545,
+            "y": 1.89988975337193
+          }
+        },
+        "verticalDegrees": 0.2882273088393641,
+        "eastEdgeDistanceM": 0.3305496804724455
+      }
+    ],
+    "head": {
+      "x": 3.4694729780787212,
+      "y": 1.7998910186735875
+    },
+    "gelCount": 60,
+    "gelOutsideStrip": 4,
+    "farthestGelFromEastM": 1.9871520948492543,
+    "mannequinTableContacts": 0
+  },
+  "returnPass": true,
+  "pass": true
+}

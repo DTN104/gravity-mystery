@@ -1,0 +1,27 @@
+{
+  "startedAt": "2026-10-10T04:45:32.320Z",
+  "endedAt": "2026-10-10T05:01:36.345Z",
+  "realDurationSeconds": 964.025,
+  "viewport": {
+    "width": 770,
+    "height": 760
+  },
+  "canvasCss": {
+    "width": 738,
+    "height": 415.125
+  },
+  "scenarios": [
+    "EAST lying to RETURN",
+    "schedule 22:00 EAST 900 seconds via hallway",
+    "standing drag and EAST",
+    "pour wet water then EAST",
+    "wipe and repour then EAST",
+    "dryTime=30 wait 71.424 seconds then EAST",
+    "lying drag",
+    "open door refusal",
+    "cooldown refusal",
+    "WEST to RETURN"
+  ],
+  "defaultsRestored": true,
+  "sourceChanged": false
+}
