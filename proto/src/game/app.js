@@ -1,14 +1,16 @@
 import { PARAMS } from '../params.js';
 import { applyTheme } from './theme.js';
 import { CaseState, reconstruction, validSandboxState } from './case-state.js';
-import { EVIDENCE, PEOPLE, PRESENT, JOURNAL, REPLAY_OPTIONS, VERDICT_OPTIONS, CONFESSION } from './case-data.js';
+import { EVIDENCE, PEOPLE, JOURNAL, REPLAY_OPTIONS, VERDICT_OPTIONS, CONFESSION } from './case-data.js';
 import { RULES } from './detector.js';
+import { renderDialogue, mountDialogue } from './dialogue-ui.js';
 
 applyTheme();
 const p = PARAMS.fullGame, stage = document.querySelector('#stage'), frame = document.querySelector('#calibration-frame');
 let state = new CaseState(), view = 'menu', selected = null, person = 'lam', reply = '', currentQuestion = '', fileTab = 'evidence', replayResult = null;
-let sandbox = null, pendingView = null, resetAsked = false, presenting = false, diagnosticAt = null, diagnosticWaiting = false;
+let sandbox = null, pendingView = null, resetAsked = false, dialoguePanel = '', diagnosticAt = null, diagnosticWaiting = false;
 let toastTimer;
+let disposeDialogue = () => {};
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const button = (text, attributes = '', primary = false) => `<button ${attributes} class="${primary ? 'primary' : ''}">${escape(text)}</button>`;
 const goButton = (text, target, primary = false) => button(text, `data-go="${target}"`, primary);
@@ -33,6 +35,10 @@ function go(target, allowExit = false) {
     }
   }
   if (target === 'calibration' && !frame.src) frame.src = './sandbox.html?ui=game';
+  // Khung quan sát của mỗi màn chỉ giữ tài liệu thuộc màn đó
+  const labIds = [...Object.keys(p.hotspots), 'E11', 'E14'], controlIds = ['E9', 'E10', 'TICKET'];
+  if (target === 'lab' && selected && !labIds.includes(selected)) selected = null;
+  if (target === 'control' && selected && !controlIds.includes(selected)) selected = null;
   document.querySelector('#notification').hidden = true; clearTimeout(toastTimer);
   view = target; send({ type: 'sandbox-visibility', visible: view === 'calibration' }); render();
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -45,6 +51,7 @@ function observation(id) {
     ${state.interpretation(id) ? `<div class="interpretation"><strong>Đọc lại sau thí nghiệm</strong><p>${escape(state.interpretation(id))}</p></div>` : ''}
     ${button(state.collected.has(id) ? 'Đã ghi vào hồ sơ' : 'Ghi vào hồ sơ', `data-collect="${id}" ${state.collected.has(id) ? 'disabled' : ''}`, true)}
     ${id === 'E8' ? `<h3>Nhật ký · không lưu hướng</h3>${journalTable(JOURNAL.filter(r => r.room === 'Lab A'))}` : ''}
+    ${id === 'E11' ? `<div class="actions">${button('Đọc mục 4 của báo cáo', 'data-evidence="E14"')}</div>` : id === 'E14' ? `<div class="actions">${button('Xem lại log terminal', 'data-evidence="E11"')}</div>` : ''}
     ${e.rule ? `<div class="actions">${goButton('Kiểm chứng trong buồng hiệu chuẩn', 'calibration')}</div>` : ''}`;
 }
 function journalTable(rows) { return `<table><thead><tr>${['Giờ', 'Phòng', 'Sự kiện', 'Nguồn'].map(t => `<th scope="col">${t}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${['time', 'room', 'event', 'origin'].map(k => `<td>${escape(r[k])}</td>`).join('')}</tr>`).join('')}</tbody></table>`; }
@@ -59,17 +66,13 @@ function hallway() {
     <aside class="panel"><p class="eyebrow">Trạm Thiên Bình · 09:30</p><h2>Gặp nhân vật</h2><div class="stack">${Object.entries(PEOPLE).map(([id, npc]) => `<button class="person-button" data-person="${id}">${portrait(id)}<span>${npc.short}<small>${npc.role}</small></span></button>`).join('')}</div><div class="actions">${goButton('Mở hồ sơ', 'file')}</div></aside></div>`;
 }
 function lab() {
-  const all = { ...p.hotspots, TERMINAL: p.hotspots.TERMINAL };
+  const all = p.hotspots;
   return `<div class="split"><section class="scene lab-scene" aria-label="Ảnh hiện trường Lab A"><div class="victim" role="img" aria-label="Minh hoạ vị trí ông Hạo" style="${coordinates(p.victimPosition)}"></div>${Object.entries(all).map(([id, xy]) => `<button class="hotspot ${selected === id ? 'selected' : ''}" style="${coordinates(xy)}" data-evidence="${id}" aria-label="${escape(id === 'TERMINAL' ? 'Terminal Hạo' : EVIDENCE[id].title)}">${state.collected.has(id) ? '✓' : '○'}<span class="hotspot-label">${escape(id === 'TERMINAL' ? 'Terminal Hạo' : EVIDENCE[id].title)}</span></button>`).join('')}</section><aside class="panel">${observation(selected)}</aside></div>
     <div class="actions" aria-label="Các điểm khám nghiệm">${Object.keys(p.hotspots).filter(id => id !== 'TERMINAL').map(id => button(EVIDENCE[id].title, `data-evidence="${id}"`)).join('')}${button('Terminal Hạo', 'data-evidence="TERMINAL"')}</div>
     ${state.visited.size >= p.hypothesisAfter ? `<section class="panel"><h3>Chuyện gì đã xảy ra?</h3><p class="muted">Ghi giả thuyết ban đầu của bạn. Bạn có thể sửa sau khi thí nghiệm.</p>${inferences()}</section>` : ''}`;
 }
 function dialogue() {
-  const npc = PEOPLE[person];
-  const choices = npc.questions.map(q => `<button data-question="${q.id}" aria-pressed="${q.id === currentQuestion}" ${q.secondRound && state.rules.size < p.secondRoundRules ? 'disabled' : ''}>${escape(q.text)}${q.secondRound && state.rules.size < p.secondRoundRules ? ` · cần ${p.secondRoundRules} quy tắc` : state.questions.has(`${person}:${q.id}`) ? ' · đã hỏi' : ''}</button>`).join('');
-  return `<div class="split"><section class="scene corridor dialogue-scene">${portrait(person)}</section><aside class="panel"><p class="eyebrow">${escape(npc.role)}</p><h2>${escape(npc.name)}</h2><div class="quote">${escape(reply || npc.opening)}</div><h3>Bạn muốn hỏi gì?</h3><div class="stack">${choices}</div>
-    <div class="actions">${button(presenting ? 'Ẩn bằng chứng' : 'Đưa bằng chứng', 'data-action="present"')}${goButton('Kết thúc trò chuyện', 'hallway')}</div>
-    ${presenting ? `<p class="muted">Chọn một vật chứng đã ghi. Nhánh chưa kiểm chứng sẽ ghi rõ điều kiện.</p><div class="stack">${[...state.collected].map(id => button(EVIDENCE[id].title + (state.canPresent(person, id) ? '' : ' · chưa có nhánh đối chất'), `data-present="${id}" ${state.canPresent(person, id) ? '' : 'disabled'}`)).join('') || '<p>Chưa ghi bằng chứng nào.</p>'}</div>` : ''}</aside></div>`;
+  return renderDialogue({ state, person, reply, currentQuestion, panel: dialoguePanel });
 }
 function inferences() {
   return `<p class="source">Giả thuyết tạm thời — có thể để trống hoặc sửa sau thí nghiệm.</p><div class="inferences">${[['what', 'Chuyện gì?', { accident: 'Tai nạn', fight: 'Ẩu đả', unknown: 'Chưa rõ' }], ['when', 'Khi nào?', { before: 'Trước chu kỳ', during: 'Trong chu kỳ', unknown: 'Chưa rõ' }], ['who', 'Ai?', { lam: 'Lâm', thu: 'Thư', khoa: 'Khoa', unknown: 'Chưa rõ' }]].map(([id, label, values]) => `<label>${label}<select data-inference="${id}">${options(values, state.inference[id], 'Chưa kết luận')}</select></label>`).join('')}</div>`;
@@ -103,6 +106,9 @@ function conclusion() {
   return `<section class="panel conclusion"><p class="eyebrow">Báo cáo điều tra</p><h2>Kết luận của bạn</h2><p>Chọn kết luận và bằng chứng bạn đã tự kiểm chứng. Bạn có thể trở lại điều tra.</p>${Object.entries(VERDICT_OPTIONS).map(([id, values]) => `<label>${labels[id]}<select data-verdict="${id}">${options(values, state.verdict[id])}</select></label>`).join('')}<p class="feedback" id="verdict-feedback" role="status"></p><div class="actions">${button('Gửi kết luận', 'data-action="verdict"', true)}${goButton('Tiếp tục điều tra', 'hallway')}</div><div class="early"><p class="source">Kết thúc điều tra sớm</p>${button('Ký xác nhận tai nạn', 'data-action="early"')}</div></section>`;
 }
 function render() {
+  const questionScroll = stage.querySelector('.dialogue-questions-list')?.scrollTop || 0;
+  disposeDialogue(); disposeDialogue = () => {};
+  document.body.dataset.gameView = view;
   const [title, objective] = titles[view]; document.querySelector('#page-title').textContent = title; document.querySelector('#objective').textContent = objective;
   document.querySelector('#navigation').hidden = view === 'menu'; document.querySelector('#verdict-link').hidden = view === 'menu';
   document.querySelector('#hallway-return').hidden = view === 'menu' || view === 'hallway';
@@ -111,29 +117,36 @@ function render() {
   if (view === 'calibration') return;
   stage.innerHTML = ({ menu, hallway, lab, dialogue, file, control, replay, conclusion,
     help: () => `<section class="panel conclusion"><h2>Điều tra bằng thí nghiệm</h2><p>Bạn là Nguyễn Hoài An, điều tra viên an toàn. Trưởng trạm Hạo chết trong Lab A khóa kín. Bạn cần kiểm chứng biên bản sơ bộ trước khi ký.</p><ol><li>Vào Lab A, bấm dấu vết và Ghi vào hồ sơ.</li><li>Gặp Lâm, Thư, Khoa; lời khai được ghi riêng với quan sát.</li><li>Thử đổi trọng lực trong buồng hiệu chuẩn, rồi đọc lại hiện trường.</li><li>Đối chiếu hồ sơ, tái hiện giả thuyết và gửi kết luận.</li></ol><p class="source">Chưa lưu tiến trình. Tải lại trang sẽ bắt đầu phiên mới.</p>${goButton('Ra hành lang', 'hallway', true)}</section>` })[view]();
+  if (view === 'dialogue') disposeDialogue = mountDialogue(stage, questionScroll);
+}
+function closeDialoguePanel() {
+  const action = dialoguePanel === 'history' ? 'dialogue-history' : 'present';
+  dialoguePanel = ''; render(); stage.querySelector(`[data-action="${action}"]`)?.focus({ preventScroll: true });
 }
 document.addEventListener('click', event => {
   const b = event.target.closest('button'); if (!b || b.disabled) return;
   if (b.dataset.go) return go(b.dataset.go);
-  if (b.dataset.person) { person = b.dataset.person; reply = ''; currentQuestion = ''; presenting = false; return go('dialogue'); }
+  if (b.dataset.person) { person = b.dataset.person; reply = ''; currentQuestion = ''; dialoguePanel = ''; return go('dialogue'); }
   if (b.dataset.evidence) {
     const id = b.dataset.evidence;
-    if (id === 'TERMINAL') { selected = state.permission ? 'E11' : 'E11'; if (state.permission) state.visit('E11'); }
+    if (id === 'TERMINAL') { selected = 'E11'; state.visit('E11'); } // visit() tự từ chối khi chưa có quyền; observation('E11') hiện thông báo khóa
     else { selected = id; state.visit(id); }
-    render(); if (id === 'TERMINAL' && state.permission) stage.querySelector('aside').insertAdjacentHTML('beforeend', button('Đọc mục 4 của báo cáo', 'data-evidence="E14"')); return;
+    render(); return;
   }
   if (b.dataset.collect) { if (state.collect(b.dataset.collect)) { notify('Đã ghi vào hồ sơ.'); render(); } return; }
   if (b.dataset.fileEvidence) { selected = b.dataset.fileEvidence; render(); return; }
   if (b.dataset.controlEvidence) { selected = b.dataset.controlEvidence; state.visit(selected); render(); return; }
-  if (b.dataset.question) { const q = state.ask(person, b.dataset.question); if (q) { reply = q.reply; currentQuestion = q.id; render(); } return; }
-  if (b.dataset.present) { const text = state.present(person, b.dataset.present); if (text) { reply = text; currentQuestion = ''; presenting = false; render(); } return; }
+  if (b.dataset.question) { const q = state.ask(person, b.dataset.question); if (q) { reply = q.reply; currentQuestion = q.id; render(); stage.querySelector(`[data-question="${q.id}"]`)?.focus({ preventScroll: true }); } return; }
+  if (b.dataset.present) { const text = state.present(person, b.dataset.present); if (text) { reply = text; currentQuestion = ''; dialoguePanel = ''; render(); stage.querySelector('.dialogue-spoken')?.focus({ preventScroll: true }); } return; }
   if (b.dataset.tab) { fileTab = b.dataset.tab; render(); return; }
   switch (b.dataset.action) {
     case 'start': if (state.active || state.collected.size || state.rules.size) resetAsked = true; else { state.active = true; go('hallway'); return; } break;
     case 'restart': state = new CaseState(); state.active = true; selected = null; sandbox = null; diagnosticAt = null; replayResult = null; frame.removeAttribute('src'); resetAsked = false; go('hallway', true); return;
     case 'cancel-reset': resetAsked = false; break;
     case 'new-round': resetAsked = true; go('menu'); return;
-    case 'present': presenting = !presenting; break;
+    case 'present': dialoguePanel = 'evidence'; break;
+    case 'dialogue-history': dialoguePanel = 'history'; break;
+    case 'close-dialogue-panel': closeDialoguePanel(); return;
     case 'reconstruct': replayResult = reconstruction(state.replay); if (!replayResult) { document.querySelector('#replay-feedback').textContent = 'Chọn đủ bốn điều kiện trước khi chạy.'; return; } break;
     case 'verdict': { const result = state.conclude(); if (result.error) { document.querySelector('#verdict-feedback').textContent = result.error; return; } break; }
     case 'early': state.result = 'accident'; break;
@@ -142,6 +155,17 @@ document.addEventListener('click', event => {
     default: return;
   }
   render();
+});
+document.addEventListener('keydown', event => {
+  if (view !== 'dialogue' || !dialoguePanel) return;
+  const modal = stage.querySelector('.dialogue-modal');
+  if (!modal) return;
+  if (event.key === 'Escape') { event.preventDefault(); closeDialoguePanel(); return; }
+  if (event.key !== 'Tab') return;
+  const controls = [...modal.querySelectorAll('button:not(:disabled),[tabindex="0"]')];
+  const first = controls[0], last = controls.at(-1), active = document.activeElement;
+  if (event.shiftKey && (active === first || active === modal)) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && (active === last || active === modal)) { event.preventDefault(); first.focus(); }
 });
 document.addEventListener('change', event => {
   const el = event.target; const maps = [['replay', REPLAY_OPTIONS], ['verdict', VERDICT_OPTIONS]];

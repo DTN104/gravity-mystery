@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { PARAMS } from '../src/params.js';
 import { CaseState, reconstruction, validSandboxState } from '../src/game/case-state.js';
-import { JOURNAL, REPLAY_OPTIONS } from '../src/game/case-data.js';
+import { JOURNAL, REPLAY_OPTIONS, PEOPLE } from '../src/game/case-data.js';
+import { renderDialogue } from '../src/game/dialogue-ui.js';
 const results = [];
 function test(id, label, fn) { fn(); results.push({ id, label, pass: true }); console.log(`PASS ${id}: ${label}`); }
 test('UI-STATE-1', 'Ghi một lần; terminal khóa; diễn giải không lộ trước thí nghiệm', () => {
@@ -48,6 +49,22 @@ test('UI-STATE-7', 'Cầu nối từ chối dữ liệu sai kiểu và ID quy t�
   assert(validSandboxState({ type: 'sandbox-state', locked: false, inside: true, unlocked: ['R1'] }));
   for (const data of [null, {}, { type: 'sandbox-state', locked: 'false', inside: true, unlocked: [] },
     { type: 'sandbox-state', locked: false, inside: true, unlocked: ['SECRET'] }]) assert.equal(validSandboxState(data), false);
+});
+test('UI-STATE-9', 'Lý do khóa nhánh đối chất nói rõ điều kiện còn thiếu, không nói "không có nhánh"', () => {
+  const s = new CaseState(); for (const id of ['E13', 'E12', 'E8']) s.collect(id);
+  assert.match(s.presentReason('khoa', 'E13'), /R4/); s.syncRules(['R4', 'R5']); assert.equal(s.presentReason('khoa', 'E13'), null);
+  assert.match(s.presentReason('khoa', 'E12'), /22:10/); s.present('khoa', 'E13'); assert.equal(s.presentReason('khoa', 'E12'), null);
+  assert.match(s.presentReason('khoa', 'E8'), /Đèn soi/); assert.match(s.presentReason('lam', 'E13'), /không có gì để nói/);
+  assert.equal(s.presentReason('khoa', 'E6'), 'chưa ghi vào hồ sơ');
+});
+test('UI-STATE-10', 'renderDialogue: câu vòng hai bị khóa kèm điều kiện, câu đã hỏi có dấu, modal vật chứng ghi lý do', () => {
+  const s = new CaseState(); s.ask('khoa', 'witness');
+  let html = renderDialogue({ state: s, person: 'lam', reply: '', currentQuestion: '', panel: '' });
+  assert.match(html, /data-question="permission"[^>]*disabled/); assert.match(html, /Cần 4 quy tắc/);
+  html = renderDialogue({ state: s, person: 'khoa', reply: PEOPLE.khoa.questions.find(q => q.id === 'witness').reply, currentQuestion: 'witness', panel: 'evidence' });
+  assert.match(html, /data-question="witness"[^>]*aria-pressed="true"/); assert.match(html, /Lời khai đã ghi vào hồ sơ/);
+  assert.match(html, /data-present="E13" disabled>[^<]*<small>cần quy tắc R4/); assert.doesNotMatch(html, /chưa có nhánh đối chất/);
+  assert.doesNotMatch(html, /<script/);
 });
 const before = JSON.parse(await readFile(new URL('./game-ui/params-before-ui.json', import.meta.url), 'utf8'));
 test('UI-STATE-8', 'Mọi PARAMS cũ giữ nguyên; chỉ thêm nhánh fullGame', () => { const { fullGame, ...after } = PARAMS; assert.deepEqual(after, before); });

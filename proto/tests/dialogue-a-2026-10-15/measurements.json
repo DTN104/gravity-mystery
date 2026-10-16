@@ -1,0 +1,207 @@
+[
+  {
+    "accent": "rgb(239, 182, 80)",
+    "background": "linear-gradient(120deg, rgba(4, 12, 17, 0.85), rgb(20, 33, 40))",
+    "height": 900,
+    "overflowX": false,
+    "overlap": false,
+    "person": "Đỗ Văn Khoa",
+    "portraitRatio": 1,
+    "questions": {
+      "bottom": 886.3984375,
+      "height": 174.5,
+      "right": 291,
+      "width": 262,
+      "x": 29,
+      "y": 711.8984375
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 695.96875,
+      "height": 195.4375,
+      "right": 291,
+      "width": 262,
+      "x": 29,
+      "y": 500.53125
+    },
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 899.3984375,
+      "height": 700,
+      "right": 304,
+      "width": 288,
+      "x": 16,
+      "y": 199.3984375
+    },
+    "spokenScrollable": true,
+    "width": 320,
+    "requestedViewport": {
+      "width": 320,
+      "height": 900
+    }
+  },
+  {
+    "accent": "rgb(239, 182, 80)",
+    "background": "linear-gradient(120deg, rgba(4, 12, 17, 0.85), rgb(20, 33, 40))",
+    "height": 900,
+    "overflowX": false,
+    "overlap": false,
+    "person": "Đỗ Văn Khoa",
+    "portraitRatio": 1,
+    "questions": {
+      "bottom": 886.3984375,
+      "height": 174.5,
+      "right": 346,
+      "width": 317,
+      "x": 29,
+      "y": 711.8984375
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 694.7265625,
+      "height": 194.1953125,
+      "right": 346,
+      "width": 317,
+      "x": 29,
+      "y": 500.53125
+    },
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 899.3984375,
+      "height": 700,
+      "right": 359,
+      "width": 343,
+      "x": 16,
+      "y": 199.3984375
+    },
+    "spokenScrollable": true,
+    "width": 375,
+    "requestedViewport": {
+      "width": 375,
+      "height": 900
+    }
+  },
+  {
+    "accent": "rgb(239, 182, 80)",
+    "background": "linear-gradient(120deg, rgba(4, 12, 17, 0.85), rgb(20, 33, 40))",
+    "height": 900,
+    "overflowX": false,
+    "overlap": false,
+    "person": "Đỗ Văn Khoa",
+    "portraitRatio": 1,
+    "questions": {
+      "bottom": 574,
+      "height": 328,
+      "right": 717,
+      "width": 323.09375,
+      "x": 393.90625,
+      "y": 246
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 830,
+      "height": 231.59375,
+      "right": 717,
+      "width": 666,
+      "x": 51,
+      "y": 598.40625
+    },
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 857,
+      "height": 700,
+      "right": 744,
+      "width": 720,
+      "x": 24,
+      "y": 157
+    },
+    "spokenScrollable": true,
+    "width": 768,
+    "requestedViewport": {
+      "width": 768,
+      "height": 900
+    }
+  },
+  {
+    "accent": "rgb(239, 182, 80)",
+    "background": "linear-gradient(120deg, rgba(4, 12, 17, 0.85), rgb(20, 33, 40))",
+    "height": 900,
+    "overflowX": false,
+    "overlap": false,
+    "person": "Đỗ Văn Khoa",
+    "portraitRatio": 1,
+    "questions": {
+      "bottom": 525,
+      "height": 328,
+      "right": 1229,
+      "width": 520,
+      "x": 709,
+      "y": 197
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 781,
+      "height": 181.1875,
+      "right": 1229,
+      "width": 1178,
+      "x": 51,
+      "y": 599.8125
+    },
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 808,
+      "height": 700,
+      "right": 1256,
+      "width": 1232,
+      "x": 24,
+      "y": 108
+    },
+    "spokenScrollable": false,
+    "width": 1280,
+    "requestedViewport": {
+      "width": 1280,
+      "height": 900
+    }
+  },
+  {
+    "accent": "rgb(239, 182, 80)",
+    "background": "linear-gradient(120deg, rgba(4, 12, 17, 0.85), rgb(20, 33, 40))",
+    "height": 750,
+    "overflowX": false,
+    "overlap": false,
+    "person": "Đỗ Văn Khoa",
+    "portraitRatio": 1,
+    "questions": {
+      "bottom": 405,
+      "height": 208,
+      "right": 1125,
+      "width": 506.6953125,
+      "x": 618.3046875,
+      "y": 197
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 661,
+      "height": 209.984375,
+      "right": 1125,
+      "width": 1074,
+      "x": 51,
+      "y": 451.015625
+    },
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 688,
+      "height": 580,
+      "right": 1152,
+      "width": 1128,
+      "x": 24,
+      "y": 108
+    },
+    "spokenScrollable": false,
+    "width": 1176,
+    "requestedViewport": {
+      "width": 1176,
+      "height": 750
+    }
+  }
+]

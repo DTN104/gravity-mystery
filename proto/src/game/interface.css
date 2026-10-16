@@ -52,8 +52,42 @@ html[data-full-game] body{margin:0;background:var(--g-bg);color:var(--g-ink);fon
 [data-full-game] .person-button{display:grid;grid-template-columns:var(--g-controlHeight) minmax(0,1fr);gap:var(--g-gap);align-items:center;text-align:left}
 [data-full-game] .person-button .portrait{height:auto;min-height:0}
 [data-full-game] .person-button small{display:block;color:var(--g-muted)}
-[data-full-game] .scene.dialogue-scene{display:flex;align-items:end;align-self:start;aspect-ratio:auto;min-height:var(--g-portraitMin)}
-[data-full-game] .dialogue-scene .portrait{width:min(100%,calc(var(--g-sideWidth)*1.5));height:auto;min-height:0}
+[data-full-game] .scene.dialogue-scene{isolation:isolate;height:clamp(var(--g-dialogueMinHeight),calc(100dvh - var(--g-headerHeight) - var(--g-navHeight) - var(--g-padding)*2),var(--g-dialogueMaxHeight));min-height:var(--g-dialogueMinHeight);aspect-ratio:auto;background-image:var(--g-corridor)}
+[data-full-game] .dialogue-scene::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--g-shade),transparent var(--g-dialogueClearStop),var(--g-scrim) var(--g-dialogueShadeStop),var(--g-shade))}
+[data-full-game] .dialogue-hud{position:absolute;z-index:4;left:var(--g-dialogueInset);right:var(--g-dialogueInset);top:var(--g-dialogueHudTop);display:flex;justify-content:space-between;align-items:center;gap:var(--g-gap)}
+[data-full-game] .dialogue-place{font-size:var(--g-dialogueHeadingFont);letter-spacing:var(--g-dialogueTracking);text-transform:uppercase;color:var(--g-muted)}
+[data-full-game] .dialogue-hud-actions{display:flex;gap:var(--g-tight)}
+[data-full-game] .dialogue-hud-actions button,[data-full-game] .dialogue-evidence-button{display:flex;align-items:center;justify-content:center;gap:var(--g-tight);background:var(--g-shade);min-height:var(--g-dialogueButtonHeight);padding:var(--g-dialogueButtonPadding);font-size:var(--g-dialogueButtonFont)}
+[data-full-game] .dialogue-scene svg{width:var(--g-dialogueIconSize);height:var(--g-dialogueIconSize);fill:none;stroke:currentColor;stroke-width:var(--g-dialogueIconStroke);stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+[data-full-game] .dialogue-scene .dialogue-character{position:absolute;z-index:0;height:var(--g-dialoguePortraitHeight);width:auto;left:0;bottom:0;filter:drop-shadow(var(--g-dialoguePortraitShadow) var(--g-shade));pointer-events:none}
+[data-full-game] .dialogue-character::after{content:"";position:absolute;inset:var(--g-dialoguePortraitFade) 0 0;background:linear-gradient(transparent,var(--g-shade))}
+[data-full-game] .dialogue-questions{position:absolute;z-index:2;right:var(--g-dialogueInset);top:var(--g-dialogueQuestionTop);width:var(--g-dialogueQuestionWidth);max-width:var(--g-dialogueQuestionMaxWidth);max-height:calc(100% - var(--g-dialogueQuestionTop) - var(--g-dialogueInset) - var(--g-dialogueBoxHeight) - var(--g-gap));display:flex;flex-direction:column;gap:var(--g-dialogueRowMargin)}
+[data-full-game] .dialogue-questions-head{display:flex;justify-content:space-between;align-items:center;gap:var(--g-gap);font-size:var(--g-dialogueHeadingFont);letter-spacing:var(--g-dialogueTracking);text-transform:uppercase}
+[data-full-game] .dialogue-questions-head>span:last-child{color:var(--g-muted);font:var(--g-dialogueLabelFont) var(--g-mono);letter-spacing:var(--g-dialogueCountTracking);white-space:nowrap}
+[data-full-game] .dialogue-questions-list{display:grid;gap:var(--g-dialogueQuestionGap);overflow:auto;scrollbar-width:thin;scrollbar-color:var(--g-border) transparent;padding:var(--g-borderWidth) var(--g-focusOffset) var(--g-focusOffset)}
+[data-full-game] .dialogue-question{display:grid;grid-template-columns:var(--g-dialogueQuestionNumberWidth) minmax(0,1fr) var(--g-dialogueQuestionMarkWidth);gap:var(--g-dialogueQuestionColumnsGap);align-items:center;text-align:left;min-height:var(--g-dialogueQuestionHeight);padding:var(--g-dialogueQuestionPadding);background:var(--g-shade);font-size:var(--g-dialogueQuestionFont);line-height:var(--g-dialogueQuestionLine);backdrop-filter:blur(var(--g-dialogueQuestionBlur))}
+[data-full-game] .dialogue-question:hover{border-color:var(--g-accent);background:var(--g-panel)}
+[data-full-game] .dialogue-question[aria-pressed=true]{background:var(--g-panel)}
+[data-full-game] .dialogue-question small{display:block;color:var(--g-muted);font-size:var(--g-dialogueLabelFont);margin-top:var(--g-dialogueRoleGap)}
+[data-full-game] .dialogue-question-number{color:var(--g-muted);font:var(--g-dialogueLabelFont) var(--g-mono)}
+[data-full-game] .dialogue-question-mark{color:var(--g-success)}
+[data-full-game] .dialogue-question-mark svg{width:var(--g-dialogueMarkSize);height:var(--g-dialogueMarkSize)}
+[data-full-game] .dialogue-scroll-hint{font-size:var(--g-dialogueLabelFont);color:var(--g-muted);text-align:right;letter-spacing:var(--g-dialogueCountTracking)}
+[data-full-game] .dialogue-box{position:absolute;z-index:3;left:var(--g-dialogueInset);right:var(--g-dialogueInset);bottom:var(--g-dialogueInset);max-height:var(--g-dialogueBoxHeight);padding:var(--g-dialogueBoxPadding);display:flex;flex-direction:column;background:linear-gradient(var(--g-dialogueGradientAngle),var(--g-shade),var(--g-panel));border:var(--g-borderWidth) solid var(--g-border);border-top:var(--g-dialogueBoxBorder) solid var(--g-accent);border-radius:var(--g-dialogueBoxRadius);backdrop-filter:blur(var(--g-dialogueBlur));box-shadow:var(--g-dialogueBoxShadow) var(--g-shade)}
+[data-full-game] .dialogue-speaker-row{display:flex;flex-shrink:0;justify-content:space-between;align-items:center;gap:var(--g-dialogueRowGap);margin-bottom:var(--g-dialogueRowMargin)}
+[data-full-game] .dialogue-speaker-row h2{font-size:var(--g-dialogueNameFont);font-weight:500;line-height:var(--g-dialogueNameLine);letter-spacing:var(--g-dialogueNameTracking);color:var(--g-accent);margin:0}
+[data-full-game] .dialogue-speaker-row p{font-size:var(--g-dialogueLabelFont);letter-spacing:var(--g-dialogueTracking);text-transform:uppercase;color:var(--g-muted);margin:var(--g-dialogueRoleGap) 0 0}
+[data-full-game] .dialogue-spoken{font-size:var(--g-dialogueSpokenFont);min-height:0;max-height:var(--g-dialogueSpokenHeight);overflow:auto;white-space:pre-line;scrollbar-width:thin;scrollbar-color:var(--g-border) transparent;padding-right:var(--g-tight)}
+[data-full-game] .dialogue-spoken:focus-visible{outline:var(--g-borderWidth) solid var(--g-focus);outline-offset:var(--g-focusOffset)}
+[data-full-game] .dialogue-reply-status{flex-shrink:0;font-size:var(--g-dialogueLabelFont);color:var(--g-muted);margin:var(--g-dialogueStatusMargin) 0 0}
+[data-full-game] .dialogue-reply-status[data-more=true]{color:var(--g-accent)}
+[data-full-game] .dialogue-veil{position:absolute;inset:0;z-index:5;background:var(--g-shade);display:grid;place-items:center;padding:var(--g-padding);backdrop-filter:blur(var(--g-tight))}
+[data-full-game] .dialogue-modal{width:min(var(--g-dialogueModalWidth),100%);max-height:100%;overflow:auto;background:var(--g-panel);border:var(--g-borderWidth) solid var(--g-border);border-top:var(--g-dialogueBoxBorder) solid var(--g-accent);border-radius:var(--g-radius);padding:var(--g-padding);scrollbar-width:thin;scrollbar-color:var(--g-border) transparent}
+[data-full-game] .dialogue-modal-head{display:flex;align-items:center;justify-content:space-between;gap:var(--g-gap);margin-bottom:var(--g-padding)}
+[data-full-game] .dialogue-modal-head h2{font-size:var(--g-dialogueNameFont);font-weight:500;color:var(--g-accent);margin:0}
+[data-full-game] .dialogue-history-entry{border-left:var(--g-dialogueBoxBorder) solid var(--g-accent);padding-left:var(--g-gap);margin-bottom:var(--g-padding)}
+[data-full-game] .dialogue-history-entry h3{margin:0 0 var(--g-tight)}
+[data-full-game] .dialogue-history-entry p:last-child{margin:0;color:var(--g-muted)}
 [data-full-game] .quote{background:var(--g-raised);border-left:var(--g-focusWidth) solid var(--g-accent);padding:var(--g-gap);margin-block:var(--g-gap);white-space:pre-line}
 [data-full-game] .tab-row{display:flex;flex-wrap:wrap;gap:var(--g-tight);margin-bottom:var(--g-gap)}
 [data-full-game] .file-layout{display:grid;grid-template-columns:var(--g-sideWidth) minmax(0,1fr);gap:var(--g-gap)}

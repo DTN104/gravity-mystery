@@ -22,5 +22,25 @@ export function applyTheme(root = document.documentElement) {
     [data-full-game] .corridor:has(.door-link){aspect-ratio:auto;display:flex;flex-direction:column;align-items:flex-end;padding:var(--g-gap);padding-top:calc(var(--g-sceneMin)/3)}
     [data-full-game] .door-link{position:static;transform:none;margin-bottom:var(--g-tight)}
     [data-full-game] .corridor:has(.door-link) .scene-caption{position:relative;left:auto;right:auto;bottom:auto;margin-top:var(--g-gap);width:100%}
+  }@media(max-width:${PARAMS.fullGame.tokens.dialogueMobile}){
+    [data-full-game] body[data-game-view=dialogue]{padding-bottom:0}
+    [data-full-game] body[data-game-view=dialogue] #navigation{position:static}
+    [data-full-game] .scene.dialogue-scene{height:var(--g-dialogueMobileHeight);min-height:var(--g-dialogueMobileHeight)}
+    [data-full-game] .dialogue-hud{left:var(--g-dialogueMobileHudInset);right:var(--g-dialogueMobileHudInset);top:var(--g-dialogueMobileHudInset);gap:var(--g-tight)}
+    [data-full-game] .dialogue-place{font-size:var(--g-dialogueMobileRoleFont)}
+    [data-full-game] .dialogue-hud-actions{gap:var(--g-dialogueMobileQuestionGap)}
+    [data-full-game] .dialogue-hud-actions button,[data-full-game] .dialogue-evidence-button{font-size:var(--g-dialogueMobileButtonFont);padding:var(--g-dialogueMobileButtonPadding);min-height:var(--g-dialogueMobileButtonHeight);gap:var(--g-dialogueMobileQuestionGap);white-space:nowrap}
+    [data-full-game] .dialogue-scene svg{width:var(--g-dialogueMobileIconSize);height:var(--g-dialogueMobileIconSize)}
+    [data-full-game] .dialogue-scene .dialogue-character{height:var(--g-dialogueMobilePortraitHeight);top:var(--g-dialogueMobilePortraitTop);left:50%;bottom:auto;transform:translateX(-50%)}
+    [data-full-game] .dialogue-box{top:var(--g-dialogueMobileBoxTop);bottom:auto;left:var(--g-dialogueMobileInset);right:var(--g-dialogueMobileInset);max-height:var(--g-dialogueMobileBoxHeight);padding:var(--g-dialogueMobileBoxPadding)}
+    [data-full-game] .dialogue-speaker-row{gap:var(--g-tight)}
+    [data-full-game] .dialogue-speaker-row h2{font-size:var(--g-dialogueMobileNameFont)}
+    [data-full-game] .dialogue-speaker-row p{font-size:var(--g-dialogueMobileRoleFont)}
+    [data-full-game] .dialogue-spoken{font-size:var(--g-dialogueMobileSpokenFont);line-height:var(--g-dialogueMobileSpokenLine);max-height:var(--g-dialogueMobileSpokenHeight)}
+    [data-full-game] .dialogue-reply-status,[data-full-game] .dialogue-scroll-hint{font-size:var(--g-dialogueMobileStatusFont)}
+    [data-full-game] .dialogue-questions{top:auto;bottom:var(--g-dialogueMobileInset);left:var(--g-dialogueMobileInset);right:var(--g-dialogueMobileInset);width:auto;max-width:none;max-height:var(--g-dialogueMobileQuestionsHeight);gap:var(--g-tight)}
+    [data-full-game] .dialogue-questions-head{font-size:var(--g-dialogueMobileHeadingFont)}
+    [data-full-game] .dialogue-question{font-size:var(--g-dialogueMobileQuestionFont);padding:var(--g-dialogueMobileQuestionPadding);gap:var(--g-dialogueMobileQuestionGap);grid-template-columns:var(--g-dialogueMobileQuestionNumberWidth) minmax(0,1fr) var(--g-dialogueMobileQuestionMarkWidth)}
+    [data-full-game] .dialogue-veil,[data-full-game] .dialogue-modal{padding:var(--g-gap)}
   }`;
 }

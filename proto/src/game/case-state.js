@@ -20,16 +20,25 @@ export class CaseState {
     if (!q.system) this.statements.set(`${person}:${id}`, { person, question: q.text, text: q.reply });
     return q;
   }
-  canPresent(person, id) {
-    if (!this.collected.has(id) || !PRESENT[person]?.[id]) return false;
+  // Trả về null khi đưa được; ngược lại là lý do bằng lời (dùng làm nhãn trong hội thoại).
+  presentReason(person, id) {
+    if (!this.collected.has(id)) return 'chưa ghi vào hồ sơ';
+    if (!PRESENT[person]?.[id]) return `${PEOPLE[person]?.short || 'Nhân vật'} không có gì để nói về vật này`;
     if (person === 'khoa') {
-      if (id === 'E13') return this.rules.has('R4');
-      if (id === 'E12') return this.rules.has('R5') && this.presented.has('khoa:E13');
-      if (id === 'E8') return this.presented.has('khoa:E12');
-      if (id === 'E14') return this.collected.has('E8') && this.collected.has('E12') && this.presented.has('khoa:E8');
+      if (id === 'E13' && !this.rules.has('R4')) return 'cần quy tắc R4 (người ở trên tường lúc xoay)';
+      if (id === 'E12') {
+        if (!this.rules.has('R5')) return 'cần quy tắc R5 (vật thả sau khi gel đứng yên)';
+        if (!this.presented.has('khoa:E13')) return 'đối chất Lời khai lúc 22:10 trước';
+      }
+      if (id === 'E8' && !this.presented.has('khoa:E12')) return 'đối chất Đèn soi phủ gel trước';
+      if (id === 'E14') {
+        if (!this.collected.has('E8') || !this.collected.has('E12')) return 'cần ghi Bảng cục bộ và Đèn soi phủ gel';
+        if (!this.presented.has('khoa:E8')) return 'đối chất Bảng cục bộ trước';
+      }
     }
-    return true;
+    return null;
   }
+  canPresent(person, id) { return this.presentReason(person, id) === null; }
   present(person, id) {
     if (!this.canPresent(person, id)) return null;
     const text = PRESENT[person][id]; this.presented.add(`${person}:${id}`);

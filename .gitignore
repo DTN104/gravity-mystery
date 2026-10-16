@@ -17,3 +17,6 @@ node_modules/
 
 # Full-window Chrome captures remain local
 /proto/tests/playthrough-2026-10-15/*.jpg
+
+# Báo cáo xuất PDF/zip, sinh lại được
+/output/

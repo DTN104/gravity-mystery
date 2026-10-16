@@ -84,3 +84,15 @@ Chạy lại: `node tests/game-ui.test.mjs` 8/8, `node tests/rules.test.mjs` PAS
 ## Cập nhật 14/10/2026 — sửa ảnh nhân vật bị méo
 
 Đã sửa tỷ lệ chân dung/thumbnail và uniform scale hình nộm. 9/9 trường hợp chân dung (3 nhân vật × 3 kích thước khung nhìn) giữ tỷ lệ gốc; lời thoại dài không đổi kích thước ảnh. 8/8 UI-STATE và hai nhóm luật PASS, PARAMS vật lý cũ giữ nguyên. [Số đo và ảnh đối chứng](tests/character-aspect-2026-10-14/REPORT.md). Chưa chạy lại toàn bộ hồi quy vật lý/T14 trong lượt này.
+
+## Sửa sau review 16/10/2026 (Claude)
+
+Ba lỗi từ `tests/playthrough-2026-10-15/PLAYTEST-REPORT.md` mục "Những điểm nên sửa trước"; bản gốc ở `_backup-ui-2026-10-16/`.
+
+| # | Lỗi | Sửa | Kiểm |
+|---|---|---|---|
+| 1 | Lab A giữ tài liệu của phòng điều khiển trong khung Quan sát | `app.js go()`: khi sang Lab A/Điều khiển, `selected` không thuộc màn đó thì về null | Headless: điều khiển → Ticket → Lab A hiện "Chọn một dấu vết"; chiều ngược lại không còn panel lạ |
+| 2 | Nút "Đọc mục 4 của báo cáo" mất sau khi Ghi vào hồ sơ | Nút nằm trong `observation('E11')`, và E14 có nút quay lại log; bỏ `insertAdjacentHTML` và ternary thừa | UI-STATE-2 (quyền terminal) vẫn PASS; không còn nút lạc khi terminal khóa |
+| 3 | Nhãn "chưa có nhánh đối chất" sai nghĩa | `case-state.js`: thêm `presentReason(person, id)` trả lý do bằng lời; `canPresent` = `presentReason === null`; `dialogue-ui.js` hiện lý do dưới tên vật chứng | UI-STATE-9 (lý do theo từng điều kiện), UI-STATE-10 (`renderDialogue` thuần: câu khóa, dấu đã hỏi, lý do trong modal, không lọt `<script>`) |
+
+`.gitignore` thêm `/output/`. `node tests/game-ui.test.mjs` 10/10, `node tests/rules.test.mjs` PASS.

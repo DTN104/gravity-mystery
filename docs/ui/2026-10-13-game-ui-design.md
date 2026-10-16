@@ -20,7 +20,7 @@ Nội dung dựa trên `docs/concept-v0.2.md` và `docs/script-characters-v0.2.m
 - Chữ tiếng Việt có dấu; tên hướng viết đầy đủ. Thời lượng hiển thị **1 phút / 5 phút / 15 phút**. Nhãn chính xác là **Chu kỳ tới khi về Xuống**, thay cho nhãn mơ hồ trong ảnh mẫu.
 - Mỗi màn có tên địa điểm hoặc công việc, hành động chính rõ và đường quay lại. Các nút giữ cùng hình dạng, cỡ chữ, trạng thái chọn, focus và disabled.
 - Cảnh phòng vẫn là game **2D nhìn ngang**. Phối cảnh trong ảnh mẫu chỉ minh hoạ không khí; không chuyển engine sang 3D hoặc dùng ảnh có sẵn các nút thay cho UI thật.
-- Lời thoại, quan sát và lựa chọn nằm cạnh cảnh. Hình nhân vật và minh hoạ môi trường được chuẩn bị thành tài nguyên riêng; chữ và nút là phần tử tương tác thật.
+- Quan sát hiện trường nằm cạnh cảnh. Hội thoại dùng mẫu A được chọn ngày 15/10/2026: chân dung, câu hỏi và lời thoại cùng nằm trong cảnh hành lang; lời thoại ở đáy cảnh. Hình nhân vật và minh hoạ môi trường là tài nguyên riêng; chữ và nút là phần tử tương tác thật.
 - Tên cửa đúng là **Lab A / Hiệu chuẩn / Điều khiển**. Không dùng nhãn Lab B, Lab C xuất hiện trong ảnh minh hoạ menu.
 
 ## 3. Các màn và hành vi
@@ -30,7 +30,7 @@ Nội dung dựa trên `docs/concept-v0.2.md` và `docs/script-characters-v0.2.m
 | Menu | Bắt đầu điều tra, mở buồng hiệu chuẩn, đọc cách chơi. Ghi rõ bản thử nghiệm chưa lưu tiến trình; không có nút tiếp tục giả. |
 | Hành lang | Ba cửa tới Lab A, buồng hiệu chuẩn, phòng điều khiển; danh sách Lâm, Thư, Khoa để bắt đầu hội thoại. Chỉ dẫn ngắn: chọn phòng hoặc người muốn gặp. |
 | Lab A | Ảnh hiện trường với các điểm khám nghiệm từ kịch bản. Bấm một điểm để khoanh vật/vết và đọc quan sát ở cột phải; Ghi vào hồ sơ không tạo bản ghi trùng. Hiện trường là ảnh đã niêm phong, không kéo hoặc đổ nước lên đó. |
-| Hội thoại | Chân dung nhân vật cạnh cảnh hành lang; tên, vai trò, câu nói và các câu hỏi ở cột phải. Có Đưa bằng chứng và Kết thúc trò chuyện. Nội dung theo cây kịch bản, không có nhãn báo người nói thật/dối. |
+| Hội thoại | Mẫu A của `proto/demo-dialogue.html`: chân dung lớn bên trái trong hành lang, câu hỏi nổi bên phải trong cùng cảnh, tên/vai trò/lời thoại ở đáy. Nhật ký hội thoại và Đưa bằng chứng mở trong cảnh; Kết thúc quay lại hành lang. Màn hẹp xếp chân dung, lời thoại, câu hỏi theo chiều dọc trong cảnh. Giữ điều kiện khóa, ghi lời khai và đối chất theo cây kịch bản, không có nhãn báo người nói thật/dối. |
 | Hồ sơ | Ba mục Bằng chứng / Lời khai / Giả thuyết. Mỗi mục ghi nguồn và địa điểm. Giả thuyết Chuyện gì / Khi nào / Ai do người chơi chọn, chưa được chọn thì để trống; không điền lời giải hộ. Có đường tới thí nghiệm liên quan và quay lại điều tra. |
 | Phòng điều khiển | Nhật ký đêm qua, tablet bảo trì, ticket và giao diện chẩn đoán. Nhật ký chỉ có Giờ / Phòng / Sự kiện / Nguồn. Quyền xem terminal và nội dung được mở theo kịch bản, không giả lập đăng nhập tài khoản thật. |
 | Buồng hiệu chuẩn | Cảnh vật lý hiện có, bảng cục bộ cố định bên phải, hướng dẫn ba bước và các công cụ lớn dưới phòng. Hướng xếp hình chữ thập; hẹn giờ gập; các thẻ không che phòng. Cửa, chốt, intercom, đổ nước và sổ quy tắc dùng chức năng hiện có. |
@@ -59,7 +59,9 @@ Trạng thái điều tra ở bộ nhớ trong một phiên, theo phạm vi conc
 
 ## 6. Hiển thị và tiếp cận
 
-Desktop là bố cục chính theo mẫu A: cảnh lớn bên trái, cột nội dung bên phải, thanh công cụ hoặc điều hướng ngay dưới cảnh. Khi chiều rộng không đủ, xếp dọc và giữ cảnh cùng hành động chính dễ tìm; không cuộn ngang. Bảng nhật ký thích ứng mà không mất nội dung.
+Desktop là bố cục chính theo mẫu A: cảnh lớn bên trái, cột nội dung bên phải, thanh công cụ hoặc điều hướng ngay dưới cảnh. Riêng hội thoại theo mẫu A duyệt ngày 15/10 đặt toàn bộ nội dung trong cảnh như bảng trên. Khi chiều rộng không đủ, xếp dọc và giữ cảnh cùng hành động chính dễ tìm; không cuộn ngang. Lời thoại dài và danh sách câu hỏi có vùng cuộn riêng cùng chỉ dẫn khi còn nội dung. Bảng nhật ký thích ứng mà không mất nội dung.
+
+Trên màn hẹp ở riêng màn hội thoại, thanh điều hướng nằm sau cảnh thay vì cố định đè lên các câu hỏi.
 
 Các thao tác ngoài canvas dùng button/input/select thật, có nhãn, focus rõ và dùng bàn phím được. Màu không là dấu hiệu duy nhất: chọn/khóa/đã ghi đều có chữ hoặc trạng thái tương ứng. Vật nhỏ trong buồng có nhãn và vùng bắt chuột lớn hơn hình vẽ; tăng hình vẽ không tăng thân vật lý.
 

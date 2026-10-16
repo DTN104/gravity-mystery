@@ -35,6 +35,16 @@
     "pass": true
   },
   {
+    "id": "UI-STATE-9",
+    "label": "Lý do khóa nhánh đối chất nói rõ điều kiện còn thiếu, không nói \"không có nhánh\"",
+    "pass": true
+  },
+  {
+    "id": "UI-STATE-10",
+    "label": "renderDialogue: câu vòng hai bị khóa kèm điều kiện, câu đã hỏi có dấu, modal vật chứng ghi lý do",
+    "pass": true
+  },
+  {
     "id": "UI-STATE-8",
     "label": "Mọi PARAMS cũ giữ nguyên; chỉ thêm nhánh fullGame",
     "pass": true

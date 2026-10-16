@@ -1,0 +1,146 @@
+[
+  {
+    "bodyOverflowX": false,
+    "height": 900,
+    "layout": "a",
+    "portraitRatio": 1,
+    "questionScrollable": false,
+    "questions": {
+      "bottom": 598.5,
+      "height": 326.5,
+      "right": 1214,
+      "width": 520,
+      "x": 694,
+      "y": 272
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 834,
+      "height": 150.390625,
+      "right": 1214,
+      "width": 1163,
+      "x": 51,
+      "y": 683.609375
+    },
+    "quoteQuestionOverlap": false,
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 861,
+      "height": 678,
+      "right": 1241,
+      "width": 1217,
+      "x": 24,
+      "y": 183
+    },
+    "spokenScrollable": false,
+    "width": 1265
+  },
+  {
+    "bodyOverflowX": false,
+    "height": 900,
+    "layout": "b",
+    "portraitRatio": 1,
+    "questionScrollable": false,
+    "questions": {
+      "bottom": 838,
+      "height": 194.5,
+      "right": 1214,
+      "width": 1163,
+      "x": 51,
+      "y": 643.5
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 489.0234375,
+      "height": 176.5859375,
+      "right": 1179.25,
+      "width": 522.4453125,
+      "x": 656.8046875,
+      "y": 312.4375
+    },
+    "quoteQuestionOverlap": false,
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 861,
+      "height": 678,
+      "right": 1241,
+      "width": 1217,
+      "x": 24,
+      "y": 183
+    },
+    "spokenScrollable": false,
+    "width": 1265
+  },
+  {
+    "bodyOverflowX": false,
+    "height": 900,
+    "layout": "b",
+    "portraitRatio": 1,
+    "questionScrollable": true,
+    "questions": {
+      "bottom": 829.9375,
+      "height": 247.796875,
+      "right": 333,
+      "width": 306,
+      "x": 27,
+      "y": 582.140625
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 552.0703125,
+      "height": 219.8984375,
+      "right": 333,
+      "width": 191.3984375,
+      "x": 141.6015625,
+      "y": 332.171875
+    },
+    "quoteQuestionOverlap": false,
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 842.9375,
+      "height": 710,
+      "right": 346,
+      "width": 332,
+      "x": 14,
+      "y": 132.9375
+    },
+    "spokenScrollable": true,
+    "width": 360
+  },
+  {
+    "bodyOverflowX": false,
+    "height": 900,
+    "layout": "a",
+    "portraitRatio": 1,
+    "questionScrollable": true,
+    "questions": {
+      "bottom": 922.4375,
+      "height": 177,
+      "right": 333,
+      "width": 306,
+      "x": 27,
+      "y": 745.4375
+    },
+    "questionsWithinScene": true,
+    "quote": {
+      "bottom": 721.375,
+      "height": 190.5,
+      "right": 333,
+      "width": 306,
+      "x": 27,
+      "y": 530.875
+    },
+    "quoteQuestionOverlap": false,
+    "quoteWithinScene": true,
+    "scene": {
+      "bottom": 935.4375,
+      "height": 710,
+      "right": 346,
+      "width": 332,
+      "x": 14,
+      "y": 225.4375
+    },
+    "spokenScrollable": true,
+    "width": 360
+  }
+]
