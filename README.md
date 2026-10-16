@@ -14,7 +14,8 @@ Mở [game.html](http://127.0.0.1:4173/game.html) để chơi. Cần kết nối
 
 - `proto/game.html`: giao diện toàn game.
 - `proto/sandbox.html`: buồng thử cơ chế độc lập.
-- `proto/index.html`: prototype vật lý để hồi quy.
+- `proto/index.html`: chuyển thẳng sang `game.html` (bản chơi).
+- `proto/physics-lab.html`: prototype vật lý để hồi quy (trước đây là `index.html`).
 - `docs/`: concept, kịch bản, đặc tả và hướng dẫn playtest.
 - `proto/tests/`: runner, dữ liệu và bằng chứng kiểm thử.
 

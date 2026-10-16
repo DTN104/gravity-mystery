@@ -1,6 +1,6 @@
 # Trạm Thiên Bình — bản thử nghiệm
 
-Đọc `docs/spec-proto-v0.4.md` và `docs/spec-sandbox-v0.3.md` từ thư mục gốc. `index.html` là prototype hồi quy; `sandbox.html` là buồng chơi bước 3. `tests/` chứa kiểm thử, số đo và thí nghiệm đối chứng, không được import vào ứng dụng.
+Đọc `docs/spec-proto-v0.4.md` và `docs/spec-sandbox-v0.3.md` từ thư mục gốc. `physics-lab.html` là prototype hồi quy (trước là `index.html`); `index.html` nay chuyển sang `game.html`; `sandbox.html` là buồng chơi bước 3. `tests/` chứa kiểm thử, số đo và thí nghiệm đối chứng, không được import vào ứng dụng.
 
 Chạy từ thư mục gốc:
 
@@ -18,7 +18,7 @@ Tiến trình chỉ giữ trong phiên hiện tại. Tải lại hoặc xác nh�
 
 ## Chơi buồng độc lập và tự test
 
-Mở [sandbox.html](http://127.0.0.1:4173/sandbox.html). Trang [index.html](http://127.0.0.1:4173/) là prototype vật lý để hồi quy.
+Mở [sandbox.html](http://127.0.0.1:4173/sandbox.html). Trang [physics-lab.html](http://127.0.0.1:4173/physics-lab.html) là prototype vật lý để hồi quy; [/](http://127.0.0.1:4173/) mở thẳng bản chơi `game.html`.
 
 1. Làm theo thẻ Thư: kéo nhẹ ca trên bàn rồi thả. Trong **Bảng cục bộ**, chọn **▶ Đông**, **1 phút**, rồi **XOAY NGAY**. Ca đã ở trên bàn. Màn hình hẹp thì cuộn xuống để tìm bảng.
 2. Quan sát phòng và dòng sự kiện bên dưới; để buồng trở về Xuống. Dùng **Bỏ qua chờ ▸** sau khi đã xem đoạn muốn quan sát.
